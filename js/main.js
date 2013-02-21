@@ -37,7 +37,9 @@ function mainLoop(timestamp) {
     // calculate our delta
     wa01.gDelta = timestamp - wa01.gPrevTimestamp;
     wa01.gPrevTimestamp = timestamp;
-    wa01.gTitleElement.innerText = "d: " + wa01.gDelta;
+
+    // just a test of updating the title so we know our mainloop is running
+    wa01.gTitleElement.innerText = wa01.gDELTA_TEXT + wa01.gDelta;
     // request animation for the next loop call
     window.requestAnimationFrame(mainLoop, wa01.gCanvasElement);
 
