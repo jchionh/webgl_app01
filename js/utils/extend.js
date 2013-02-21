@@ -1,9 +1,7 @@
 /**
- * Created with JetBrains WebStorm.
  * User: jchionh
  * Date: 2/20/13
  * Time: 11:40 PM
- * To change this template use File | Settings | File Templates.
  */
 // create namespace
 wa01.utils = wa01.utils || {};

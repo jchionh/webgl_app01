@@ -1,10 +1,9 @@
 /**
- * Created with JetBrains WebStorm.
  * User: jchionh
  * Date: 2/20/13
  * Time: 11:38 PM
- * To change this template use File | Settings | File Templates.
  */
+
 // create the app namepsace
 var wa01 = wa01 || {};
 
