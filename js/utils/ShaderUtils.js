@@ -13,6 +13,8 @@ wa01.utils = wa01.utils || {};
  *
  * @param {Object} gl the gl context
  * @param {string} id the id of the script tag that has this shader
+ *
+ * @return {Object} the compiled shader
  */
 wa01.utils.compileShaderFromScriptElement = function (gl, id) {
     var shaderScript = document.getElementById(id);
