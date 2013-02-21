@@ -25,6 +25,9 @@ function mainInit() {
         wa01.gSysMessageElement.innerText = "WebGL initialized.";
     }
 
+    // now let's init and compile our shaders
+    initShaders();
+
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
 }
@@ -47,4 +50,12 @@ function mainLoop(timestamp) {
     // now perform our actions here
 
 
+}
+
+/**
+ * here, we init our fragment and vertex shaders
+ */
+function initShaders() {
+    var vtxShader = wa01.utils.compileShaderFromScriptElement(gl, "vtxShader");
+    var fragShader = wa01.utils.compileShaderFromScriptElement(gl, "fragShader");
 }
