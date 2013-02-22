@@ -51,6 +51,6 @@ wa01.render.Renderer.prototype.initDefaultShaders = function(vtxShaderId, fragSh
 /**
  * here is our render function that iterates over our render objects and render them
  */
-wa01.render.Renderer.prototyp.render = function() {
+wa01.render.Renderer.prototype.render = function() {
 
 }
