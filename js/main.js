@@ -4,7 +4,7 @@
  * Time: 11:36 PM
  */
 
-// global gl
+// global WebGLRenderingContext gl
 var gl;
 
 /**
@@ -32,7 +32,7 @@ function mainInit() {
     wa01.gRenderer = new wa01.render.Renderer(gl);
 
     // init our renderer
-    wa01.gRenderer.initDefaultShaders("vtxShader", "fragShader");
+    wa01.gRenderer.initDefaultShaders(gl, "vtxShader", "fragShader");
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
@@ -54,6 +54,6 @@ function mainLoop(timestamp) {
 
 
     // now perform our actions here
-
+    wa01.gRenderer.render(gl);
 }
 
