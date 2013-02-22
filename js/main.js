@@ -26,7 +26,7 @@ function mainInit() {
     }
 
     // now let's init and compile our shaders
-    initShaders();
+    initShadersAndProgram();
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
@@ -54,8 +54,14 @@ function mainLoop(timestamp) {
 
 /**
  * here, we init our fragment and vertex shaders
+ * and link the shader program
  */
-function initShaders() {
+function initShadersAndProgram() {
+    // first we compile our shaders
     var vtxShader = wa01.utils.compileShaderFromScriptElement(gl, "vtxShader");
     var fragShader = wa01.utils.compileShaderFromScriptElement(gl, "fragShader");
+    // then let's link our program
+    var attribNames = ["a_Position", "a_Color", "a_TexCoord"];
+    var shaderProgram = wa01.utils.createShaderProgram(gl, vtxShader, fragShader, attribNames);
+
 }

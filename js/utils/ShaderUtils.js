@@ -11,10 +11,10 @@ wa01.utils = wa01.utils || {};
  * we search the document for the script tag that contains the shader
  * and we compile it and return it.
  *
- * @param {Object} gl the gl context
+ * @param {WebGLRenderingContext} gl the gl context
  * @param {string} id the id of the script tag that has this shader
  *
- * @return {Object} the compiled shader
+ * @return {WebGLShader} the compiled shader
  */
 wa01.utils.compileShaderFromScriptElement = function (gl, id) {
     var shaderScript = document.getElementById(id);
@@ -51,4 +51,38 @@ wa01.utils.compileShaderFromScriptElement = function (gl, id) {
     }
     console.log("Shader compiled: " + id);
     return shader;
+}
+
+/**
+ *
+ * @param {WebGLRenderingContext} gl
+ * @param {WebGLShader} vertexShader
+ * @param {WebGLShader} fragmentShader
+ * @param {Array.<string>} attribNamesArray
+ * @return {WebGLProgram}
+ */
+wa01.utils.createShaderProgram = function(gl, vertexShader, fragmentShader, attribNamesArray) {
+    // create the program
+    var program = gl.createProgram();
+    // attach the shaders.
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    // bind our attribues here
+    for (var i = 0; i < attribNamesArray.length; ++i) {
+        gl.bindAttribLocation(program, i, attribNamesArray[i]);
+        console.log("binding attribute: " + attribNamesArray[i]);
+    }
+    // link the program.
+    gl.linkProgram(program);
+
+    // check errors
+    var success = gl.getProgramParameter(program, gl.LINK_STATUS);
+    if (!success) {
+        // something went wrong with the link
+        var errorStr = gl.getProgramInfoLog (program);
+        console.log("Error linking shader program: " + errorStr);
+        return null;
+    }
+    console.log("ShaderProgram created.");
+    return program;
 }
