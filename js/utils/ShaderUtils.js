@@ -80,6 +80,7 @@ wa01.utils.createShaderProgram = function(gl, vertexShader, fragmentShader, attr
     if (!success) {
         // something went wrong with the link
         var errorStr = gl.getProgramInfoLog (program);
+        gl.deleteProgram(program);
         console.log("Error linking shader program: " + errorStr);
         return null;
     }

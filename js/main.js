@@ -4,6 +4,9 @@
  * Time: 11:36 PM
  */
 
+// global gl
+var gl;
+
 /**
  * init our app
  */
@@ -25,8 +28,11 @@ function mainInit() {
         wa01.gSysMessageElement.innerText = "WebGL initialized.";
     }
 
-    // now let's init and compile our shaders
-    initShadersAndProgram();
+    // new our renderer
+    wa01.gRenderer = new wa01.render.Renderer(gl);
+
+    // init our renderer
+    wa01.gRenderer.initDefaultShaders("vtxShader", "fragShader");
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
@@ -49,19 +55,5 @@ function mainLoop(timestamp) {
 
     // now perform our actions here
 
-
 }
 
-/**
- * here, we init our fragment and vertex shaders
- * and link the shader program
- */
-function initShadersAndProgram() {
-    // first we compile our shaders
-    var vtxShader = wa01.utils.compileShaderFromScriptElement(gl, "vtxShader");
-    var fragShader = wa01.utils.compileShaderFromScriptElement(gl, "fragShader");
-    // then let's link our program
-    var attribNames = ["a_Position", "a_Color", "a_TexCoord"];
-    var shaderProgram = wa01.utils.createShaderProgram(gl, vtxShader, fragShader, attribNames);
-
-}
