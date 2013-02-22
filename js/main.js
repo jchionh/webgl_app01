@@ -22,10 +22,12 @@ function mainInit() {
     // now, use khronos helper to test for webGL support and setup the gl context
     gl = WebGLUtils.setupWebGL(wa01.gCanvasElement);
     if (!gl) {
-        wa01.gSysMessageElement.innerText = "Browser does not support WebGL";
+        wa01.gSysMessageElement.innerHTML = "Browser does not support WebGL";
+        console.log("Browser does not support WebGL");
         return;
     } else {
-        wa01.gSysMessageElement.innerText = "WebGL initialized.";
+        wa01.gSysMessageElement.innerHTML = "WebGL initialized.";
+        console.log("WebGL initialized.");
     }
 
     // new our renderer
@@ -48,10 +50,11 @@ function mainLoop(timestamp) {
     wa01.gPrevTimestamp = timestamp;
 
     // just a test of updating the title so we know our mainloop is running
-    wa01.gTitleElement.innerText = wa01.gDELTA_TEXT + wa01.gDelta;
+    wa01.gTitleElement.innerHTML = wa01.gDELTA_TEXT + wa01.gDelta;
     // request animation for the next loop call
-    window.requestAnimationFrame(mainLoop, wa01.gCanvasElement);
-
+    // note: requestAnimFrame is a polyfill for cross browser
+    // the actual function name is requestAnimationFrame
+    window.requestAnimFrame(mainLoop, wa01.gCanvasElement);
 
     // now perform our actions here
     wa01.gRenderer.render(gl);
