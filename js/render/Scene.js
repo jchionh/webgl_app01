@@ -8,8 +8,18 @@
 wa.render = wa.render || {};
 
 /**
- * Scene is a structure that has intrusive lists of scene nodes
+ * Scene is a structure that is a tree.
+ * Data structure of the tree is implemented using intrusive lists.
  * @constructor
  */
 wa.render.Scene = function() {
+    this.nRoot = new wa.SceneNode();
+}
+
+/**
+ *
+ * @param sceneNode
+ */
+wa.render.Scene.prototype.add = function(sceneNode) {
+
 }

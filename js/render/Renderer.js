@@ -51,7 +51,8 @@ wa.render.Renderer.prototype.initDefaultShaders = function(gl, vtxShaderId, frag
 /**
  * here is our render function that iterates over our render objects and render them
  * @param {WebGLRenderingContext} gl
+ * @param {wa.Scene} scene renderer traverses the scene graph and renders every scene node
  */
-wa.render.Renderer.prototype.render = function(gl) {
+wa.render.Renderer.prototype.render = function(gl, scene) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 }
