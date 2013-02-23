@@ -5,18 +5,18 @@
  */
 
 // create namespace
-wa01.render = wa01.render || {};
+wa.render = wa.render || {};
 
 /**
  *
  * @param {WebGLRenderingContext} gl
  * @constructor
  */
-wa01.render.Renderer = function(gl) {
+wa.render.Renderer = function(gl) {
     // constants
     this.MAX_NUM_RENDER_OBJECTS = 100;
     // our shaderhandle refs sturcture
-    this.shaderHandleRefs = new wa01.render.ShaderHandleRefs();
+    this.shaderHandleRefs = new wa.render.ShaderHandleRefs();
     this.currentRenderObjectIndex = 0;
     this.lastRenderObjectIndex = 0;
     gl.clearColor(0.3, 0.3, 0.3, 1.0);
@@ -29,13 +29,13 @@ wa01.render.Renderer = function(gl) {
  * @param {string} vtxShaderId the script tag id that has our vertex shader
  * @param {string} fragShaderId the script tag id that has out fragment shader
  */
-wa01.render.Renderer.prototype.initDefaultShaders = function(gl, vtxShaderId, fragShaderId) {
+wa.render.Renderer.prototype.initDefaultShaders = function(gl, vtxShaderId, fragShaderId) {
     // first we compile our shaders
-    var vtxShader = wa01.utils.compileShaderFromScriptElement(gl, "vtxShader");
-    var fragShader = wa01.utils.compileShaderFromScriptElement(gl, "fragShader");
+    var vtxShader = wa.utils.compileShaderFromScriptElement(gl, "vtxShader");
+    var fragShader = wa.utils.compileShaderFromScriptElement(gl, "fragShader");
     // then let's link our program
     var attribNames = ["a_Position", "a_Color", "a_TexCoord"];
-    var shaderProgram = wa01.utils.createShaderProgram(gl, vtxShader, fragShader, attribNames);
+    var shaderProgram = wa.utils.createShaderProgram(gl, vtxShader, fragShader, attribNames);
     // assign to tour shader refs
     this.shaderHandleRefs.shaderProgram = shaderProgram;
     // get our arrtibute handles
@@ -52,6 +52,6 @@ wa01.render.Renderer.prototype.initDefaultShaders = function(gl, vtxShaderId, fr
  * here is our render function that iterates over our render objects and render them
  * @param {WebGLRenderingContext} gl
  */
-wa01.render.Renderer.prototype.render = function(gl) {
+wa.render.Renderer.prototype.render = function(gl) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 }

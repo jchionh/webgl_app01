@@ -4,7 +4,7 @@
  * Time: 1:24 AM
  */
 // create namespace
-wa01.utils = wa01.utils || {};
+wa.utils = wa.utils || {};
 
 /**
  *
@@ -16,7 +16,7 @@ wa01.utils = wa01.utils || {};
  *
  * @return {WebGLShader} the compiled shader
  */
-wa01.utils.compileShaderFromScriptElement = function (gl, id) {
+wa.utils.compileShaderFromScriptElement = function (gl, id) {
     var shaderScript = document.getElementById(id);
     if (!shaderScript) {
         return null;
@@ -61,7 +61,7 @@ wa01.utils.compileShaderFromScriptElement = function (gl, id) {
  * @param {Array.<string>} attribNamesArray
  * @return {WebGLProgram}
  */
-wa01.utils.createShaderProgram = function(gl, vertexShader, fragmentShader, attribNamesArray) {
+wa.utils.createShaderProgram = function(gl, vertexShader, fragmentShader, attribNamesArray) {
     // create the program
     var program = gl.createProgram();
     // attach the shaders.

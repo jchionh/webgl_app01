@@ -5,12 +5,12 @@
  */
 
 // namespace
-wa01.render = wa01.render || {};
+wa.render = wa.render || {};
 /**
  * structure that stores reference to the shader
  * @constructor
  */
-wa01.render.ShaderHandleRefs = function() {
+wa.render.ShaderHandleRefs = function() {
     this.shaderProgram = null; // WebGLProgram
     this.posHandle = 0; // GLint
     this.colorHandle = 0; // GLint

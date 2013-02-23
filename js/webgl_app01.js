@@ -5,14 +5,14 @@
  */
 
 // create the app namepsace
-var wa01 = wa01 || {};
+var wa = wa || {};
 
 // here are our globals
-wa01.gTitleElement = document.getElementsByTagName("title")[0];
-wa01.gSysMessageElement = document.getElementById("sysMessageArea");
-wa01.gPrevTimestamp = 0;
-wa01.gDelta = 0;
-wa01.gCanvasElement = document.getElementById('renderCanvas');
-wa01.gCanvasContext = wa01.gCanvasElement.getContext('webgl');
-wa01.gDELTA_TEXT = "d: ";
-wa01.gRenderer = null;
+wa.gTitleElement = document.getElementsByTagName("title")[0];
+wa.gSysMessageElement = document.getElementById("sysMessageArea");
+wa.gPrevTimestamp = 0;
+wa.gDelta = 0;
+wa.gCanvasElement = document.getElementById('renderCanvas');
+wa.gCanvasContext = wa.gCanvasElement.getContext('webgl');
+wa.gDELTA_TEXT = "d: ";
+wa.gRenderer = null;
