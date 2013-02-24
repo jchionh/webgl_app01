@@ -18,7 +18,8 @@ wa.render = wa.render || {};
  * @extends wa.utils.IntrusiveListNode
  */
 wa.render.SceneNode = function() {
-
+    // call the base class ctor
+    wa.utils.IntrusiveListNode.call(this);
 };
 
 // perform prototype extend

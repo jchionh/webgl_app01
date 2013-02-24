@@ -75,7 +75,7 @@ wa.render.Viewpoint.prototype.updateViewMatrix = function() {
  * whenever viewport changes, we need to update the projection matrix
  */
 wa.render.Viewpoint.prototype.updateProjMatrix = function() {
-  this.calcViewProjMatrix();
+    this.calcViewProjMatrix();
 };
 
 /**
@@ -90,9 +90,9 @@ wa.render.Viewpoint.prototype.setDimensions = function(width, height) {
 
 /**
  * setting a world translation
- * @param {Float32} x
- * @param {Float32} y
- * @param {Float32} z
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
  */
 wa.render.Viewpoint.prototype.setWorldTranslation = function(x, y, z) {
     this.worldTranslation[v.X] = x;
@@ -102,9 +102,9 @@ wa.render.Viewpoint.prototype.setWorldTranslation = function(x, y, z) {
 
 /**
  * setting a world scale
- * @param {Float32} x
- * @param {Float32} y
- * @param {Float32} z
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
  */
 wa.render.Viewpoint.prototype.setWorldScale = function(x, y, z) {
     this.worldScale[v.X] = x;

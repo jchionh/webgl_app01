@@ -16,3 +16,4 @@ wa.gCanvasElement = document.getElementById('renderCanvas');
 wa.gCanvasContext = wa.gCanvasElement.getContext('webgl');
 wa.gDELTA_TEXT = "d: ";
 wa.gRenderer = null;
+wa.gViewpoint = null;
