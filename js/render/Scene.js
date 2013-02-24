@@ -13,7 +13,7 @@ wa.render = wa.render || {};
  * @constructor
  */
 wa.render.Scene = function() {
-    this.nRoot = new wa.SceneNode();
+    this.nRoot = new wa.render.SceneNode();
 };
 
 /**

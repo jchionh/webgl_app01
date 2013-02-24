@@ -47,6 +47,9 @@ function mainInit() {
     // set our viewpoint into the renderer
     wa.gRenderer.setViewpoint(gl, wa.gViewpoint);
 
+    // init a scene for the renderer to render
+    wa.gScene = new wa.render.Scene();
+
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
 }
@@ -68,6 +71,6 @@ function mainLoop(timestamp) {
     window.requestAnimFrame(mainLoop, wa.gCanvasElement);
 
     // now perform our actions here
-    wa.gRenderer.render(gl);
+    wa.gRenderer.render(gl, wa.gScene);
 }
 
