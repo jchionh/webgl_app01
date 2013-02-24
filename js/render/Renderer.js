@@ -82,8 +82,24 @@ wa.render.Renderer.prototype.render = function(gl, scene) {
     var currentNode = sceneRoot.getFirstChild();
 
     while(currentNode != null) {
-        currentNode.draw(this);
+        currentNode.draw(gl, this);
         currentNode = currentNode.getSibling();
     }
     // now call draw on our scene node
+};
+
+/**
+ * get the view projection matrix from our viewpoint
+ * @return {mat4}
+ */
+wa.render.Renderer.prototype.getViewProjMatrix = function() {
+    return this.viewpoint.getViewProjMatrix();
+};
+
+/**
+ * get our shader handle refs
+ * @return {wa.render.ShaderHandleRefs}
+ */
+wa.render.Renderer.prototype.getShaderHandleRefs = function() {
+    return this.shaderHandleRefs;
 };

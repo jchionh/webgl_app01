@@ -46,12 +46,17 @@ wa.render.SceneNode = function() {
     this.modelMatrix = mat4.create();
     this.texMatrix = mat4.create();
 
+    // storage for our calculated model view projection matrix
+    this.mvpMatrix = mat4.create();
+
     // indentity our matrices
     mat4.identity(this.modelMatrix);
     mat4.identity(this.texMatrix);
+    mat4.identity(this.mvpMatrix);
 
     // we also have a shape object that defines our vertices to draw
     this.shape = null;
+    this.shaderHandleRefs = null;
 };
 
 // perform prototype extend
@@ -80,10 +85,50 @@ wa.render.SceneNode.prototype.calcTexMatrix = function() {
 }
 
 /**
+ * we pass in a view projection matrix and then calcualte our final
+ * model-view-projection matrix
+ * @param {mat4} vpMatrix
+ */
+wa.render.SceneNode.prototype.calcMVPMatrix = function(vpMatrix) {
+    mat4.multiply(vpMatrix, this.modelMatrix, this.mvpMatrix);
+};
+
+/**
  * takes the renderer and then draws the scene node
+ * @param {WebGLRenderingContext} gl
  * @param {wa.render.Renderer} renderer
  */
-wa.render.SceneNode.prototype.draw = function(renderer) {
+wa.render.SceneNode.prototype.draw = function(gl, renderer) {
+    // we calculate our model matrix
+    this.calcModelMatrix();
+    // now we calculate our final model view projection matrix
+    this.calcMVPMatrix(renderer.getViewProjMatrix());
+
+    this.shaderHandleRefs = renderer.getShaderHandleRefs();
+
+
+    /*
+    // then set the
+    var posHandle = this.shaderHandleRefs.posHandle;
+    gl.enableVertexAttribArray(posHandle);
+    gl.vertexAttribPointer(posHandle, 3, gl.FLOAT, false, 0, 0);
+    // now we send the vertex data into gl
+    gl.bufferData(gl.ARRAY_BUFFER, this.shape.getVertices(), gl.DYNAMIC_DRAW);
+
+    var colorHandle = this.shaderHandleRefs.colorHandle;
+    gl.enableVertexAttribArray(colorHandle);
+    gl.vertexAttribPointer(colorHandle, 4, gl.FLOAT, false, 0, 0);
+    // now we send the vertex data into gl
+    gl.bufferData(gl.ARRAY_BUFFER, this.shape.getVtxColors(), gl.DYNAMIC_DRAW);
+
+    // send in the mvp matrix
+    gl.uniformMatrix4fv(this.shaderHandleRefs.matrixHandle, false, this.mvpMatrix);
+
+    // finally, draw the arrays!
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.shape.getNumVertices());
+    */
+
+
     //console.log("SceneNode: render: " + this.id);
     /*
     var shape = this.shape;
@@ -91,4 +136,4 @@ wa.render.SceneNode.prototype.draw = function(renderer) {
     i++;
     var b = i + 2;
     */
-}
+};
