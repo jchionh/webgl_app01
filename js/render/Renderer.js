@@ -19,6 +19,8 @@ wa.render.Renderer = function(gl) {
     this.currentRenderObjectIndex = 0;
     this.lastRenderObjectIndex = 0;
 
+    // this is our viewpoint
+    this.viewpoint = null;
 };
 
 /**
@@ -54,6 +56,17 @@ wa.render.Renderer.prototype.initDefaultShaders = function(gl, vtxShaderId, frag
     this.shaderHandleRefs.texSamplerHandle = gl.getUniformLocation(shaderProgram, "u_Texture");
     //console.log("texSamplerHandle: " + this.shaderHandleRefs.texSamplerHandle);
 };
+
+/**
+ * sets up out viewpoint camera for getting the view projection matrix
+ * @param {WebGLRenderingContext} gl
+ * @param {wa.render.Viewpoint} viewpoint
+ */
+wa.render.Renderer.prototype.setViewpoint = function(gl, viewpoint) {
+    this.viewpoint = viewpoint;
+    // with our viewpoint, we can init our viewport with the viewpoint dimensions
+    gl.viewport(0, 0, viewpoint.width, viewpoint.height);
+}
 
 /**
  * here is our render function that iterates over our render objects and render them

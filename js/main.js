@@ -44,6 +44,9 @@ function mainInit() {
     // int our rendere's view
     wa.gRenderer.initView();
 
+    // set our viewpoint into the renderer
+    wa.gRenderer.setViewpoint(gl, wa.gViewpoint);
+
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
 }
