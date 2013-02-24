@@ -35,12 +35,6 @@ if(typeof Float32Array != 'undefined') {
     glMatrixArrayType = Array;
 }
 
-var v = {};
-v.X = 0;
-v.Y = 1;
-v.Z = 2;
-v.W = 3;
-
 /*
  * vec3 - 3 Dimensional Vector
  */

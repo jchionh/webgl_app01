@@ -20,6 +20,8 @@ wa.render = wa.render || {};
 wa.render.SceneNode = function() {
     // call the base class ctor
     wa.utils.IntrusiveListNode.call(this);
+
+    // now here's our transforms
 };
 
 // perform prototype extend
