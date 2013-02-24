@@ -50,6 +50,10 @@ function mainInit() {
     // init a scene for the renderer to render
     wa.gScene = new wa.render.Scene();
 
+    // test a quad shape
+    var quad = new wa.render.QuadShape();
+    quad.setDimensions(100.0, 100.0);
+
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
 }
