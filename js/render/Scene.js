@@ -14,7 +14,7 @@ wa.render = wa.render || {};
  */
 wa.render.Scene = function() {
     this.nRoot = new wa.SceneNode();
-}
+};
 
 /**
  *
@@ -22,4 +22,4 @@ wa.render.Scene = function() {
  */
 wa.render.Scene.prototype.add = function(sceneNode) {
 
-}
+};

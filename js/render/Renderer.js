@@ -3,7 +3,6 @@
  * Date: 2/21/13
  * Time: 10:52 PM
  */
-
 // create namespace
 wa.render = wa.render || {};
 
@@ -21,7 +20,7 @@ wa.render.Renderer = function(gl) {
     this.lastRenderObjectIndex = 0;
     gl.clearColor(0.3, 0.3, 0.3, 1.0);
     gl.enable(gl.DEPTH_TEST);
-}
+};
 
 /**
  * init our shaders and shader program
@@ -46,7 +45,7 @@ wa.render.Renderer.prototype.initDefaultShaders = function(gl, vtxShaderId, frag
     this.shaderHandleRefs.texMatrixHandle = gl.getUniformLocation(shaderProgram, "u_TexMatrix");
     this.shaderHandleRefs.texSamplerHandle = gl.getUniformLocation(shaderProgram, "u_Texture");
     //console.log("texSamplerHandle: " + this.shaderHandleRefs.texSamplerHandle);
-}
+};
 
 /**
  * here is our render function that iterates over our render objects and render them
@@ -55,4 +54,4 @@ wa.render.Renderer.prototype.initDefaultShaders = function(gl, vtxShaderId, frag
  */
 wa.render.Renderer.prototype.render = function(gl, scene) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-}
+};

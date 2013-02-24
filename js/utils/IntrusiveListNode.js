@@ -15,4 +15,4 @@ wa.utils.IntrusiveListNode = function() {
     this.nParent = null;
     this.nSibling = null;
     this.nFirstChild = null;
-}
+};

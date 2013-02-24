@@ -51,7 +51,7 @@ wa.utils.compileShaderFromScriptElement = function (gl, id) {
     }
     console.log("Shader compiled: " + id);
     return shader;
-}
+};
 
 /**
  *
@@ -86,4 +86,4 @@ wa.utils.createShaderProgram = function(gl, vertexShader, fragmentShader, attrib
     }
     console.log("ShaderProgram created.");
     return program;
-}
+};

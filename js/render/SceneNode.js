@@ -18,7 +18,7 @@ wa.render = wa.render || {};
  */
 wa.render.SceneNode = function() {
 
-}
+};
 
 // perform prototype extend
 wa.utils.extend(wa.render.SceneNode, wa.utils.IntrusiveListNode);
