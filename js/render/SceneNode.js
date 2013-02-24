@@ -25,6 +25,10 @@ wa.render.SceneNode = function() {
     this.position = vec3.create();
     this.scale = vec3.create();
     this.orientation = vec3.create();
+    // set scale to 1
+    this.scale[v.X] = 1.0;
+    this.scale[v.Y] = 1.0;
+    this.scale[v.Z] = 1.0;
 
     // here's our texture transforms
     // they are all 2D transforms, but we use vec3 simply
@@ -32,6 +36,11 @@ wa.render.SceneNode = function() {
     this.texTranslate = vec3.create();
     this.texRotate = vec3.create();
     this.texScale = vec3.create();
+
+    // set tex scale to 1
+    this.texScale[v.X] = 1.0;
+    this.texScale[v.Y] = 1.0;
+    this.texScale[v.Z] = 1.0;
 
     // and here's our transform
     this.modelMatrix = mat4.create();
@@ -44,3 +53,26 @@ wa.render.SceneNode = function() {
 
 // perform prototype extend
 wa.utils.extend(wa.render.SceneNode, wa.utils.IntrusiveListNode);
+
+/**
+ * here we calculate our model matrix
+ */
+wa.render.SceneNode.prototype.calcModelMatrix = function() {
+    mat4.identity(this.modelMatrix);
+    mat4.translate(this.modelMatrix, this.position);
+    mat4.rotateX(this.modelMatrix, this.orientation[o.PITCH]);
+    mat4.rotateY(this.modelMatrix, this.orientation[o.YAW]);
+    mat4.rotateZ(this.modelMatrix, this.orientation[o.ROLL]);
+    mat4.scale(this.modelMatrix, this.scale);
+}
+
+/**
+ * calculate our tex matrix
+ */
+wa.render.SceneNode.prototype.calcTexMatrix = function() {
+    mat4.identity(this.texMatrix);
+    mat4.translate(this.texMatrix, this.texTranslate);
+    mat4.rotateZ(this.texMatrix, this.texRotate[o.ROLL]);
+    mat4.scale(this.texMatrix, this.texScale);
+}
+
