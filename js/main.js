@@ -36,9 +36,12 @@ function mainInit() {
     // init our renderer
     wa.gRenderer.initDefaultShaders(gl, "vtxShader", "fragShader");
 
+    // int our rendere's view
+    wa.gRenderer.initView();
+
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
-};
+}
 
 /**
  * this is our mainloop, that will be called with requestAnimationFrame
@@ -58,5 +61,5 @@ function mainLoop(timestamp) {
 
     // now perform our actions here
     wa.gRenderer.render(gl);
-};
+}
 

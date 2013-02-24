@@ -18,9 +18,17 @@ wa.render.Renderer = function(gl) {
     this.shaderHandleRefs = new wa.render.ShaderHandleRefs();
     this.currentRenderObjectIndex = 0;
     this.lastRenderObjectIndex = 0;
+
+};
+
+/**
+ * init our view
+ */
+wa.render.Renderer.prototype.initView = function() {
     gl.clearColor(0.3, 0.3, 0.3, 1.0);
     gl.enable(gl.DEPTH_TEST);
 };
+
 
 /**
  * init our shaders and shader program
