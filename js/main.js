@@ -51,7 +51,10 @@ function mainInit() {
     wa.gScene = new wa.render.Scene();
     // test a new scene node
     var root = wa.gScene.getRoot();
-    wa.utils.inList.addChild(root, new wa.render.SceneNode());
+    var imageEntity = new wa.entity.ImageEntity();
+    imageEntity.setDimensions(100.0, 100.0);
+
+    wa.utils.inList.addChild(root, imageEntity);
 
     // test a quad shape
     var quad = new wa.render.QuadShape();

@@ -49,6 +49,9 @@ wa.render.SceneNode = function() {
     // indentity our matrices
     mat4.identity(this.modelMatrix);
     mat4.identity(this.texMatrix);
+
+    // we also have a shape object that defines our vertices to draw
+    this.shape = null;
 };
 
 // perform prototype extend
@@ -81,5 +84,11 @@ wa.render.SceneNode.prototype.calcTexMatrix = function() {
  * @param {wa.render.Renderer} renderer
  */
 wa.render.SceneNode.prototype.draw = function(renderer) {
-    //console.log("SceneNode: render.");
+    //console.log("SceneNode: render: " + this.id);
+    /*
+    var shape = this.shape;
+    var i = 0;
+    i++;
+    var b = i + 2;
+    */
 }
