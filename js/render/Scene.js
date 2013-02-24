@@ -18,6 +18,14 @@ wa.render.Scene = function() {
 
 /**
  *
+ * @return {wa.render.SceneNode}
+ */
+wa.render.Scene.prototype.getRoot = function() {
+    return this.nRoot;
+};
+
+/**
+ *
  * @param sceneNode
  */
 wa.render.Scene.prototype.add = function(sceneNode) {

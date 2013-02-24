@@ -5,7 +5,7 @@
  */
 
 // global WebGLRenderingContext gl
-var gl;
+gl = null;
 
 /**
  * init our app
@@ -49,6 +49,9 @@ function mainInit() {
 
     // init a scene for the renderer to render
     wa.gScene = new wa.render.Scene();
+    // test a new scene node
+    var root = wa.gScene.getRoot();
+    wa.utils.inList.addChild(root, new wa.render.SceneNode());
 
     // test a quad shape
     var quad = new wa.render.QuadShape();

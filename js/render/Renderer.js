@@ -71,8 +71,19 @@ wa.render.Renderer.prototype.setViewpoint = function(gl, viewpoint) {
 /**
  * here is our render function that iterates over our render objects and render them
  * @param {WebGLRenderingContext} gl
- * @param {wa.Scene} scene renderer traverses the scene graph and renders every scene node
+ * @param {wa.render.Scene} scene renderer traverses the scene graph and renders every scene node
  */
 wa.render.Renderer.prototype.render = function(gl, scene) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    // TESTING draw a scene node
+    // just iterate a list for now, no tree
+    var sceneRoot = scene.getRoot();
+    var currentNode = sceneRoot.getFirstChild();
+
+    while(currentNode != null) {
+        currentNode.draw(this);
+        currentNode = currentNode.getSibling();
+    }
+    // now call draw on our scene node
 };

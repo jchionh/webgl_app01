@@ -76,3 +76,10 @@ wa.render.SceneNode.prototype.calcTexMatrix = function() {
     mat4.scale(this.texMatrix, this.texScale);
 }
 
+/**
+ * takes the renderer and then draws the scene node
+ * @param {wa.render.Renderer} renderer
+ */
+wa.render.SceneNode.prototype.draw = function(renderer) {
+    //console.log("SceneNode: render.");
+}
