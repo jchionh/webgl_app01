@@ -37,7 +37,7 @@ function mainInit() {
     wa.gRenderer.initDefaultShaders(gl, "vtxShader", "fragShader");
 
     // new a furstrum viewpoint
-    wa.gViewpoint = new wa.render.FrustrumViewpoint(wa.gCanvasElement.width, wa.gCanvasElement.height);
+    wa.gViewpoint = new wa.render.FrustumViewpoint(wa.gCanvasElement.width, wa.gCanvasElement.height);
     wa.gViewpoint.updateViewMatrix();
     wa.gViewpoint.updateProjMatrix();
 

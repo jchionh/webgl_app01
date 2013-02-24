@@ -12,7 +12,7 @@ wa.render = wa.render || {};
  * @constructor
  * @extends wa.render.Viewpoint
  */
-wa.render.FrustrumViewpoint = function(width, height) {
+wa.render.FrustumViewpoint = function(width, height) {
 
     // call the base class ctor
     wa.render.Viewpoint.call(this);
@@ -25,13 +25,13 @@ wa.render.FrustrumViewpoint = function(width, height) {
 };
 
 // extend from viewpoint
-wa.utils.extend(wa.render.FrustrumViewpoint, wa.render.Viewpoint);
+wa.utils.extend(wa.render.FrustumViewpoint, wa.render.Viewpoint);
 
 /**
  * we update the projection matrix here
  * @override
  */
-wa.render.FrustrumViewpoint.prototype.updateProjMatrix = function() {
+wa.render.FrustumViewpoint.prototype.updateProjMatrix = function() {
     this.aspectRatio = this.width / this.height;
     mat4.frustum(-this.aspectRatio, this.aspectRatio, this.BOTTOM, this.TOP, this.near, this.far, this.projMatrix);
     // call the super class method
@@ -44,7 +44,7 @@ wa.render.FrustrumViewpoint.prototype.updateProjMatrix = function() {
  * to give a 1 to 1 pixel mapping on the xy plane when z=0
  * @override
  */
-wa.render.FrustrumViewpoint.prototype.calcViewProjMatrix = function() {
+wa.render.FrustumViewpoint.prototype.calcViewProjMatrix = function() {
     // we compute a world scale that will map all world units on the XY plane at z=0
     // to be 1-1 mapping of pixel units on screen.
     var xExtentAtZeroZ = this.aspectRatio * this.position[v.Z];
