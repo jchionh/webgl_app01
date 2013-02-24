@@ -1,9 +1,3 @@
-/**
- * User: jchionh
- * Date: 2/23/13
- * Time: 6:32 PM
- */
-
 /*
  * glMatrix.js - High performance matrix and vector operations for WebGL
  * version 0.9.6
@@ -40,6 +34,12 @@ if(typeof Float32Array != 'undefined') {
 } else {
     glMatrixArrayType = Array;
 }
+
+var v = {};
+v.X = 0;
+v.Y = 1;
+v.Z = 2;
+v.W = 3;
 
 /*
  * vec3 - 3 Dimensional Vector

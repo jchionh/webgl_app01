@@ -15,6 +15,7 @@ wa.render = wa.render || {};
  * It has pointers to its sibling and first child, implemented as intrusive lists
  *
  * @constructor
+ * @extends wa.utils.IntrusiveListNode
  */
 wa.render.SceneNode = function() {
 
