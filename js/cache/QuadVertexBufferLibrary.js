@@ -61,8 +61,6 @@ wa.cache.QuadVertexBufferLibrary.prototype.getVBO = function(width, height) {
     }
     // set the data into the vbo
     this.gl.bufferData(this.gl.ARRAY_BUFFER, vertexArray, this.gl.STATIC_DRAW);
-    buffer.itemSize = wa.render.RenderConstants.FLOATS_PER_VTX;
-    buffer.numItems = wa.cache.QuadShapeConst.NUM_VERTICES;
 
     // now we have our buffer, let's store it into our cache
     this.cache[key] = buffer;

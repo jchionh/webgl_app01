@@ -111,19 +111,19 @@ wa.render.SceneNode.prototype.draw = function(gl, renderer) {
     var posHandle = this.shaderHandleRefs.posHandle;
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     gl.enableVertexAttribArray(posHandle);
-    gl.vertexAttribPointer(posHandle, vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(posHandle, wa.render.RenderConstants.FLOATS_PER_VTX, gl.FLOAT, false, 0, 0);
 
     var colorBuffer = this.shape.getColorBufferObject()
     var colorHandle = this.shaderHandleRefs.colorHandle;
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
     gl.enableVertexAttribArray(colorHandle);
-    gl.vertexAttribPointer(colorHandle, colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(colorHandle, wa.render.RenderConstants.FLOATS_PER_COLOR, gl.FLOAT, false, 0, 0);
 
     var texCoordBuffer = this.shape.getTexCoordBufferObject();
     var texCoordHandle = this.shaderHandleRefs.texCoordHandle;
     gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
     gl.enableVertexAttribArray(texCoordHandle);
-    gl.vertexAttribPointer(texCoordHandle, texCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(texCoordHandle, wa.render.RenderConstants.FLOATS_PER_TEX_COORD, gl.FLOAT, false, 0, 0);
 
     // send in the mvp matrix
     gl.uniformMatrix4fv(this.shaderHandleRefs.matrixHandle, false, this.mvpMatrix);

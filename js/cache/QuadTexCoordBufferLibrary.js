@@ -61,8 +61,6 @@ wa.cache.QuadTexCoordBufferLibrary.prototype.createVBO = function(texCoordKey, d
 
     // set the data into the vbo
     this.gl.bufferData(this.gl.ARRAY_BUFFER, data, this.gl.STATIC_DRAW);
-    buffer.itemSize = wa.render.RenderConstants.FLOATS_PER_TEX_COORD;
-    buffer.numItems = wa.cache.QuadShapeConst.NUM_VERTICES;
 
     var key = texCoordKey;
     // now we have our buffer, let's store it into our cache
