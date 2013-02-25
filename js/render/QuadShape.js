@@ -6,9 +6,6 @@
 // namespace
 wa.render = wa.render || {};
 
-// quad shape constants
-wa.render.QuadShapeConst = {};
-
 /**
  * Quad shape defines a quad
  * @constructor
