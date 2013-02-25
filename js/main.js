@@ -58,13 +58,13 @@ function mainInit() {
     // test a new scene node
     var root = wa.gScene.getRoot();
     var imageEntity = new wa.entity.ImageEntity();
-    imageEntity.setDimensions(100.0, 100.0);
+    imageEntity.setDimensions(100, 100);
 
     wa.utils.inList.addChild(root, imageEntity);
 
     // test a quad shape
-    var quad = new wa.render.QuadShape();
-    quad.setDimensions(100.0, 100.0);
+    //var quad = new wa.render.QuadShape();
+    //quad.setDimensions(100.0, 100.0);
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());

@@ -33,7 +33,8 @@ wa.utils.extend(wa.render.FrustumViewpoint, wa.render.Viewpoint);
  */
 wa.render.FrustumViewpoint.prototype.updateProjMatrix = function() {
     this.aspectRatio = this.width / this.height;
-    mat4.frustum(-this.aspectRatio, this.aspectRatio, this.BOTTOM, this.TOP, this.near, this.far, this.projMatrix);
+    //mat4.frustum(-this.aspectRatio, this.aspectRatio, this.BOTTOM, this.TOP, this.near, this.far, this.projMatrix);
+    mat4.perspective(45, this.aspectRatio, this.near, this.far, this.projMatrix);
     // call the super class method
     wa.render.Viewpoint.prototype.updateProjMatrix.call(this);
 };
@@ -53,9 +54,9 @@ wa.render.FrustumViewpoint.prototype.calcViewProjMatrix = function() {
     this.setWorldScale(mapScale, mapScale, mapScale);
 
     // compute the vpMatrix here
-    mat4.multiply(this.vpMatrix, this.projMatrix, this.vpMatrix);
+    mat4.multiply(this.projMatrix, this.viewMatrix, this.vpMatrix);
 
     // perform our world transform here
-    mat4.scale(this.vpMatrix, this.worldScale);
-    mat4.translate(this.vpMatrix, this.worldTranslation);
+    //mat4.scale(this.vpMatrix, this.worldScale);
+    //mat4.translate(this.vpMatrix, this.worldTranslation);
 };

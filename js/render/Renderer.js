@@ -55,6 +55,7 @@ wa.render.Renderer.prototype.initDefaultShaders = function(gl, vtxShaderId, frag
     this.shaderHandleRefs.texMatrixHandle = gl.getUniformLocation(shaderProgram, "u_TexMatrix");
     this.shaderHandleRefs.texSamplerHandle = gl.getUniformLocation(shaderProgram, "u_Texture");
     //console.log("texSamplerHandle: " + this.shaderHandleRefs.texSamplerHandle);
+    gl.useProgram(shaderProgram);
 };
 
 /**

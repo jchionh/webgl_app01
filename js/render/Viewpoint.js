@@ -37,7 +37,7 @@ wa.render.Viewpoint = function() {
     this.worldScale = vec3.create();
 
     // near and far planes
-    this.near = 1.0;
+    this.near = 0.1;
     this.far = 100.0;
 
     // w and h of the camera viewport

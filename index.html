@@ -26,10 +26,10 @@
         // here's the calculated model-view-projection matrix
         uniform mat4 u_MVPMatrix;
         // here's the texture transform matrix
-        uniform mat4 u_TexMatrix;
+        //uniform mat4 u_TexMatrix;
 
         // per-vertex position
-        attribute vec4 a_Position;
+        attribute vec3 a_Position;
         // per-vertex color
         attribute vec4 a_Color;
         // texture coordinate
@@ -47,11 +47,12 @@
             v_Color = a_Color;
 
             // transform our vertex coords here
-            vec4 texTransformed = u_TexMatrix * vec4(a_TexCoord.x, a_TexCoord.y, 0.0, 1.0);
-            v_TexCoord = texTransformed.xy;
+            //vec4 texTransformed = u_TexMatrix * vec4(a_TexCoord.x, a_TexCoord.y, 0.0, 1.0);
+            //v_TexCoord = texTransformed.xy;
+            v_TexCoord = a_TexCoord;
 
             // transform our vertex here
-            gl_Position = u_MVPMatrix * a_Position;
+            gl_Position = u_MVPMatrix * vec4(a_Position, 1.0);
         }
     </script>
 
@@ -60,7 +61,7 @@
         precision mediump float;
 
         // here's the input shader
-        uniform sampler2D u_Texture;
+        //uniform sampler2D u_Texture;
 
         // here's the interpolated vertex color for this fragment
         varying vec4 v_Color;
@@ -71,7 +72,9 @@
         void main()
         {
             // final color is the vertex color with the texture
-            gl_FragColor = v_Color * texture2D(u_Texture, v_TexCoord);
+            // gl_FragColor = v_Color * texture2D(u_Texture, v_TexCoord);
+            //gl_FragColor = v_Color;
+            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
         }
     </script>
 

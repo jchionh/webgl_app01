@@ -107,27 +107,30 @@ wa.render.SceneNode.prototype.draw = function(gl, renderer) {
     this.shaderHandleRefs = renderer.getShaderHandleRefs();
 
 
-    /*
-    // then set the
+    // vertices
+    var vertexBuffer = this.shape.getVertexBufferObject();
     var posHandle = this.shaderHandleRefs.posHandle;
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     gl.enableVertexAttribArray(posHandle);
-    gl.vertexAttribPointer(posHandle, 3, gl.FLOAT, false, 0, 0);
-    // now we send the vertex data into gl
-    gl.bufferData(gl.ARRAY_BUFFER, this.shape.getVertices(), gl.DYNAMIC_DRAW);
+    gl.vertexAttribPointer(posHandle, vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
+    var colorBuffer = this.shape.getColorBufferObject()
     var colorHandle = this.shaderHandleRefs.colorHandle;
+    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
     gl.enableVertexAttribArray(colorHandle);
-    gl.vertexAttribPointer(colorHandle, 4, gl.FLOAT, false, 0, 0);
-    // now we send the vertex data into gl
-    gl.bufferData(gl.ARRAY_BUFFER, this.shape.getVtxColors(), gl.DYNAMIC_DRAW);
+    gl.vertexAttribPointer(colorHandle, colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+    var texCoordBuffer = this.shape.getTexCoordBufferObject();
+    var texCoordHandle = this.shaderHandleRefs.texCoordHandle;
+    gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+    gl.enableVertexAttribArray(texCoordHandle);
+    gl.vertexAttribPointer(texCoordHandle, texCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
     // send in the mvp matrix
     gl.uniformMatrix4fv(this.shaderHandleRefs.matrixHandle, false, this.mvpMatrix);
 
     // finally, draw the arrays!
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.shape.getNumVertices());
-    */
-
+    gl.drawArrays(gl.TRIANGLES, 0, this.shape.getNumVertices());
 
     //console.log("SceneNode: render: " + this.id);
     /*
