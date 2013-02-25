@@ -18,9 +18,12 @@ wa.render.QuadShape = function() {
     // call our base class ctor
     wa.render.Shape.call(this);
 
+    // number of vertices in the quad
+    this.numVertices = 4;
+
     // now init our buffers
     this.setVertexBufferObject(wa.gVtxLibrary.getVBO(1, 1));
-    this.setColorBufferObject(wa.gClrLibrary.getVBO(wa.cache.QuadShapeConst.ColorKey.WHITE));
+    this.setColorBufferObject(wa.gClrLibrary.getVBO(wa.cache.QuadShapeConst.ColorKey.MULTI));
     this.setTexCoordBufferObject(wa.gTexCoordLibrary.getVBO(wa.cache.QuadShapeConst.TexCoordKey.FULL));
 };
 

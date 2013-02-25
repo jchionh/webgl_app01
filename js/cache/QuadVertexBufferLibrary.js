@@ -8,6 +8,7 @@ wa.cache = wa.cache || {};
 
 wa.cache.QuadShapeConst = wa.cache.QuadShapeConst || {};
 wa.cache.QuadShapeConst.NUM_VERTICES = 4;
+
 wa.cache.QuadShapeConst.VERTICES = new Float32Array([
     -0.5,  0.5, 0.0, // top left
     -0.5, -0.5, 0.0, // bot left

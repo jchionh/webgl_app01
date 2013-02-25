@@ -106,7 +106,6 @@ wa.render.SceneNode.prototype.draw = function(gl, renderer) {
 
     this.shaderHandleRefs = renderer.getShaderHandleRefs();
 
-
     // vertices
     var vertexBuffer = this.shape.getVertexBufferObject();
     var posHandle = this.shaderHandleRefs.posHandle;
@@ -130,13 +129,5 @@ wa.render.SceneNode.prototype.draw = function(gl, renderer) {
     gl.uniformMatrix4fv(this.shaderHandleRefs.matrixHandle, false, this.mvpMatrix);
 
     // finally, draw the arrays!
-    gl.drawArrays(gl.TRIANGLES, 0, this.shape.getNumVertices());
-
-    //console.log("SceneNode: render: " + this.id);
-    /*
-    var shape = this.shape;
-    var i = 0;
-    i++;
-    var b = i + 2;
-    */
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.shape.getNumVertices());
 };

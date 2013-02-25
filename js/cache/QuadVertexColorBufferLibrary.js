@@ -6,15 +6,23 @@
 
 // namespace
 wa.cahce = wa.cache || {};
-wa.cache.QuadShapeConst.VERTEX_COLORS = new Float32Array([
+wa.cache.QuadShapeConst.VERTEX_COLORS_WHITE = new Float32Array([
     1.0, 1.0, 1.0, 1.0,
     1.0, 1.0, 1.0, 1.0,
     1.0, 1.0, 1.0, 1.0,
     1.0, 1.0, 1.0, 1.0
 ]);
+
+wa.cache.QuadShapeConst.VERTEX_COLORS_MULTI = new Float32Array([
+    1.0, 0.0, 0.0, 1.0,
+    0.0, 1.0, 0.0, 1.0,
+    0.0, 0.0, 1.0, 1.0,
+    1.0, 0.0, 1.0, 1.0
+]);
+
 wa.cache.QuadShapeConst.ColorKey = {};
 wa.cache.QuadShapeConst.ColorKey.WHITE = "WHITE";
-
+wa.cache.QuadShapeConst.ColorKey.MULTI = "MULTI";
 
 /**
  * This is a library of vertex buffers.
@@ -31,7 +39,8 @@ wa.cache.QuadVertexColorBufferLibrary = function(gl) {
     this.cache = {};
 
     // let's init a default VBO of white;
-    this.createVBO(wa.cache.QuadShapeConst.ColorKey.WHITE, wa.cache.QuadShapeConst.VERTEX_COLORS);
+    this.createVBO(wa.cache.QuadShapeConst.ColorKey.WHITE, wa.cache.QuadShapeConst.VERTEX_COLORS_WHITE);
+    this.createVBO(wa.cache.QuadShapeConst.ColorKey.MULTI, wa.cache.QuadShapeConst.VERTEX_COLORS_MULTI);
 };
 
 /**
