@@ -8,12 +8,18 @@ wa.render = wa.render || {};
 
 /**
  * Shape contains the information to define a 3D shape
- * - the vertex buffers
- * - the texture coordinate buffers
- * - the vertex colors
+ * - the vertex buffer objects
+ * - the texture coordinate buffer object
+ * - the vertex color buffer object
+ * @param {WebGLRenderingContext} gl
  * @constructor
  */
-wa.render.Shape = function() {
+wa.render.Shape = function(gl) {
+
+    // store a reference to the gl context for creation of buffers
+    // and clearing of buffers
+
+    // these are the vertex buffer objects
     this.vertices = null;
     this.vtxColors = null;
     this.texCoords = null;
@@ -22,27 +28,26 @@ wa.render.Shape = function() {
 
 /**
  *
- * @param {Array.<number>} vertexArray
+ * @param {WebGLBuffer} vbo
  */
-wa.render.Shape.prototype.initVertices = function(vertexArray) {
-    this.vertices = new Float32Array(vertexArray);
-    this.numVertices = vertexArray.length / wa.render.RenderConstants.FLOATS_PER_VTX;
+wa.render.Shape.prototype.setVertexBufferObject = function(vbo) {
+    this.vertices = vbo;
 };
 
 /**
  *
- * @param {Array.<number>} vtxColorArray
+ * @param {WebGLBuffer} vbo
  */
-wa.render.Shape.prototype.initVtxColors = function(vtxColorArray) {
-    this.vtxColors = new Float32Array(vtxColorArray);
+wa.render.Shape.prototype.setColorBufferObject = function(vbo) {
+    this.vtxColors = vbo;
 };
 
 /**
  *
- * @param {Array.<number>} texCoordArray
+ * @param {WebGLBuffer} vbo
  */
-wa.render.Shape.prototype.initTexCoords = function(texCoordArray) {
-    this.texCoords = new Float32Array(texCoordArray);
+wa.render.Shape.prototype.setTexCoordBufferObject = function(vbo) {
+    this.texCoords = vbo;
 };
 
 /**
@@ -55,24 +60,24 @@ wa.render.Shape.prototype.getNumVertices = function() {
 
 /**
  *
- * @return {Float32Array} vertex array
+ * @return {WebGLBuffer} vertex buffer object
  */
-wa.render.Shape.prototype.getVertices = function() {
+wa.render.Shape.prototype.getVertexBufferObject = function() {
     return this.vertices;
 };
 
 /**
  *
- * @return {Float32Array} the vertex colors
+ * @return {WebGLBuffer} the color buffer object
  */
-wa.render.Shape.prototype.getVtxColors = function() {
+wa.render.Shape.prototype.getColorBufferObject = function() {
     return this.vtxColors;
 };
 
 /**
  *
- * @return {Float32Array} the texture coords
+ * @return {WebGLBuffer} the texture coords buffer object
  */
-wa.render.Shape.prototype.getTexCoords = function() {
+wa.render.Shape.prototype.getTexCoordBufferObject = function() {
     return this.texCoords;
 };

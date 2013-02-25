@@ -10,6 +10,7 @@ wa.render.RenderConstants = {};
 
 wa.render.RenderConstants.FLOATS_PER_VTX = 3;
 wa.render.RenderConstants.FLOATS_PER_TEX_COORD = 2;
+wa.render.RenderConstants.FLOATS_PER_COLOR = 4;
 
 // these are in sort form for ease
 var v = {};
@@ -22,3 +23,9 @@ var o = {};
 o.PITCH = 0;
 o.YAW   = 1;
 o.ROLL  = 2;
+
+var c = {};
+c.R = 0;
+c.G = 1;
+c.B = 2;
+c.A = 3;

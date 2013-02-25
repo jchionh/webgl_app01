@@ -81,7 +81,7 @@ wa.render.Renderer.prototype.render = function(gl, scene) {
     var sceneRoot = scene.getRoot();
     var currentNode = sceneRoot.getFirstChild();
 
-    while(currentNode != null) {
+    while(currentNode !== null) {
         currentNode.draw(gl, this);
         currentNode = currentNode.getSibling();
     }

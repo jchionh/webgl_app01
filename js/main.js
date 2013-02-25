@@ -30,6 +30,11 @@ function mainInit() {
         console.log("WebGL initialized.");
     }
 
+    // create our cache libraries
+    wa.gVtxLibrary = new wa.cache.QuadVertexBufferLibrary(gl);
+    wa.gClrLibrary = new wa.cache.QuadVertexColorBufferLibrary(gl);
+    wa.gTexCoordLibrary = new wa.cache.QuadTexCoordBufferLibrary(gl);
+
     // new our renderer
     wa.gRenderer = new wa.render.Renderer(gl);
 
@@ -46,6 +51,7 @@ function mainInit() {
 
     // set our viewpoint into the renderer
     wa.gRenderer.setViewpoint(gl, wa.gViewpoint);
+
 
     // init a scene for the renderer to render
     wa.gScene = new wa.render.Scene();
