@@ -60,7 +60,19 @@ function mainInit() {
     var imageEntity = new wa.entity.ImageEntity();
     imageEntity.setDimensions(100, 100);
 
+    var imageEntity2 = new wa.entity.ImageEntity();
+    imageEntity2.setDimensions(100, 100);
+    imageEntity2.position[v.X] = -250;
+
+    var imageEntity3 = new wa.entity.ImageEntity();
+    imageEntity3.setDimensions(100, 100);
+    imageEntity3.position[v.Y] = 25;
+    imageEntity3.position[v.X] = -100;
+    imageEntity3.position[v.Z] = -100;
+
     wa.utils.inList.addChild(root, imageEntity);
+    wa.utils.inList.addChild(root, imageEntity2);
+    wa.utils.inList.addChild(root, imageEntity3);
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
