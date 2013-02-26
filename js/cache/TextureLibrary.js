@@ -46,7 +46,7 @@ wa.cache.TextureLibrary.prototype.addTexture = function(image) {
     var textureId = image.src;
     var texture = this.getTexture(textureId);
     // if we have an existing texture, let's return it
-    if (texture != null) {
+    if (texture !== null) {
         return texture;
     }
 
