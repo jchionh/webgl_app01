@@ -72,7 +72,7 @@ wa.render.SceneNode.prototype.calcModelMatrix = function() {
     mat4.rotateY(this.modelMatrix, this.orientation[o.YAW]);
     mat4.rotateZ(this.modelMatrix, this.orientation[o.ROLL]);
     mat4.scale(this.modelMatrix, this.scale);
-}
+};
 
 /**
  * calculate our tex matrix
@@ -82,7 +82,7 @@ wa.render.SceneNode.prototype.calcTexMatrix = function() {
     mat4.translate(this.texMatrix, this.texTranslate);
     mat4.rotateZ(this.texMatrix, this.texRotate[o.ROLL]);
     mat4.scale(this.texMatrix, this.texScale);
-}
+};
 
 /**
  * we pass in a view projection matrix and then calcualte our final

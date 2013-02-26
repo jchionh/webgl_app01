@@ -66,7 +66,7 @@ wa.render.Renderer.prototype.setViewpoint = function(gl, viewpoint) {
     this.viewpoint = viewpoint;
     // with our viewpoint, we can init our viewport with the viewpoint dimensions
     gl.viewport(0, 0, viewpoint.width, viewpoint.height);
-}
+};
 
 /**
  * here is our render function that iterates over our render objects and render them
