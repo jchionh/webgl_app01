@@ -22,7 +22,8 @@ wa.entity.ImageEntity = function() {
     this.image = new Image();
 
     // here's out texture object used for texture mapping
-    this.texture = null;
+    // it's inited with the default untextured 1x1 white texture
+    this.texture = wa.gTextureLibrary.getTexture(wa.render.RenderConstants.DEFAULT_TEXTURE_ID);
 
     var that = this;
     this.image.onload = function() {
@@ -33,8 +34,6 @@ wa.entity.ImageEntity = function() {
         //console.log("w: " + that.image.width + " h: " + that.image.height);
         that.texture = texture;
     };
-    // let's set the image as the default 16x16 white texture
-    this.image.src = wa.render.RenderConstants.DEFAULT_TEXTURE_ID;
 };
 
 // extend image entity from entity
@@ -66,10 +65,6 @@ wa.entity.ImageEntity.prototype.loadImageURL = function(imageURL) {
  * @param {wa.render.ShaderHandleRefs} shaderHandleRefs
  */
 wa.entity.ImageEntity.prototype.drawTexture = function(gl, shaderHandleRefs) {
-
-    if (this.texture === null) {
-        return;
-    }
 
     // set the active texture and bind
     gl.activeTexture(gl.TEXTURE0);

@@ -11,7 +11,7 @@ wa.render.RenderConstants = {};
 wa.render.RenderConstants.FLOATS_PER_VTX = 3;
 wa.render.RenderConstants.FLOATS_PER_TEX_COORD = 2;
 wa.render.RenderConstants.FLOATS_PER_COLOR = 4;
-wa.render.RenderConstants.DEFAULT_TEXTURE_ID = "images/white.png";
+wa.render.RenderConstants.DEFAULT_TEXTURE_ID = "UNTEXTURED";
 
 // these are in sort form for ease
 var v = {};
