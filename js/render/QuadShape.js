@@ -17,6 +17,8 @@ wa.render.QuadShape = function() {
 
     // number of vertices in the quad
     this.numVertices = 4;
+    this.width = 1;
+    this.height = 1;
 
     // now init our buffers
     this.setVertexBufferObject(wa.gVtxLibrary.getVBO(1, 1));
@@ -34,4 +36,22 @@ wa.utils.extend(wa.render.QuadShape, wa.render.Shape);
  */
 wa.render.QuadShape.prototype.setDimensions = function(width, height) {
     this.setVertexBufferObject(wa.gVtxLibrary.getVBO(width, height));
+    this.width = width;
+    this.height = height;
+};
+
+/**
+ * get the width
+ * @return {Number}
+ */
+wa.render.QuadShape.prototype.getWidth = function() {
+    return this.width;
+};
+
+/**
+ * get the height
+ * @return {Number}
+ */
+wa.render.QuadShape.prototype.getHeight = function() {
+    return this.height;
 };

@@ -31,7 +31,6 @@ wa.render.Renderer.prototype.initView = function() {
     gl.enable(gl.DEPTH_TEST);
 };
 
-
 /**
  * init our shaders and shader program
  * @param {WebGLRenderingContext} gl

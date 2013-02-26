@@ -21,3 +21,4 @@ wa.gScene = null;
 wa.gVtxLibrary = null;
 wa.gClrLibrary = null;
 wa.gTexCoordLibrary = null;
+wa.gTextureLibrary = null;

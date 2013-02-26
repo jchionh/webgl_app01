@@ -34,6 +34,7 @@ function mainInit() {
     wa.gVtxLibrary = new wa.cache.QuadVertexBufferLibrary(gl);
     wa.gClrLibrary = new wa.cache.QuadVertexColorBufferLibrary(gl);
     wa.gTexCoordLibrary = new wa.cache.QuadTexCoordBufferLibrary(gl);
+    wa.gTextureLibrary = new wa.cache.TextureLibrary(gl);
 
     // new our renderer
     wa.gRenderer = new wa.render.Renderer(gl);
@@ -59,10 +60,14 @@ function mainInit() {
     var root = wa.gScene.getRoot();
     var imageEntity = new wa.entity.ImageEntity();
     imageEntity.setDimensions(100, 100);
+    imageEntity.loadImageURL("images/stones2133.jpg");
+
+
 
     var imageEntity2 = new wa.entity.ImageEntity();
     imageEntity2.setDimensions(100, 100);
     imageEntity2.position[v.X] = -250;
+    imageEntity2.loadImageURL("images/placeholder.png");
 
     var imageEntity3 = new wa.entity.ImageEntity();
     imageEntity3.setDimensions(100, 100);

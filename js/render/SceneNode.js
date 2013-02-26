@@ -119,15 +119,22 @@ wa.render.SceneNode.prototype.draw = function(gl, renderer) {
     gl.enableVertexAttribArray(colorHandle);
     gl.vertexAttribPointer(colorHandle, wa.render.RenderConstants.FLOATS_PER_COLOR, gl.FLOAT, false, 0, 0);
 
-    var texCoordBuffer = this.shape.getTexCoordBufferObject();
-    var texCoordHandle = this.shaderHandleRefs.texCoordHandle;
-    gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
-    gl.enableVertexAttribArray(texCoordHandle);
-    gl.vertexAttribPointer(texCoordHandle, wa.render.RenderConstants.FLOATS_PER_TEX_COORD, gl.FLOAT, false, 0, 0);
+    // here we draw textures
+    this.drawTexture(gl, this.shaderHandleRefs);
 
     // send in the mvp matrix
     gl.uniformMatrix4fv(this.shaderHandleRefs.matrixHandle, false, this.mvpMatrix);
 
     // finally, draw the arrays!
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.shape.getNumVertices());
+};
+
+/**
+ * overrride this method to draw textures
+ * @param {WebGLRenderingContext} gl
+ * @param {wa.render.ShaderHandleRefs} shaderHandleRefs
+ */
+wa.render.SceneNode.prototype.drawTexture = function(gl, shaderHandleRefs) {
+    // here's an empty method for drawing texture.
+    // derived classes will overrride this method to draw textures
 };
