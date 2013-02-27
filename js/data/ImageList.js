@@ -13,5 +13,9 @@ wa.data.ImageListURLs = [
     "images/frost_covered_plants_177063.jpg",
     "images/frost_oak_leaf_winter_218310.jpg",
     "images/natureflowers1342.jpg",
-    "images/stones2133.jpg"
+    "images/stones2133.jpg",
+    "images/forest3083.jpg",
+    "images/natureflower1344.jpg",
+    "images/natureflowerblue1339.jpg",
+    "images/snowdorp00375.jpg"
 ];
