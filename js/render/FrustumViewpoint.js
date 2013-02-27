@@ -33,8 +33,8 @@ wa.utils.extend(wa.render.FrustumViewpoint, wa.render.Viewpoint);
  */
 wa.render.FrustumViewpoint.prototype.updateProjMatrix = function() {
     this.aspectRatio = this.width / this.height;
-    mat4.frustum(-this.aspectRatio, this.aspectRatio, this.BOTTOM, this.TOP, this.near, this.far, this.projMatrix);
-    // mat4.perspective(45, this.aspectRatio, this.near, this.far, this.projMatrix);
+    //mat4.frustum(-this.aspectRatio, this.aspectRatio, this.BOTTOM, this.TOP, this.near, this.far, this.projMatrix);
+    mat4.perspective(45, this.aspectRatio, this.near, this.far, this.projMatrix);
     // call the super class method
     wa.render.Viewpoint.prototype.updateProjMatrix.call(this);
 };
