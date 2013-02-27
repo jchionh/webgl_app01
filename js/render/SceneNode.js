@@ -107,17 +107,17 @@ wa.render.SceneNode.prototype.draw = function(gl, renderer) {
     this.shaderHandleRefs = renderer.getShaderHandleRefs();
 
     // vertices
-    var vertexBuffer = this.shape.getVertexBufferObject();
-    var posHandle = this.shaderHandleRefs.posHandle;
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-    gl.enableVertexAttribArray(posHandle);
-    gl.vertexAttribPointer(posHandle, wa.render.RenderConstants.FLOATS_PER_VTX, gl.FLOAT, false, 0, 0);
+    //var vertexBuffer = this.shape.getVertexBufferObject();
+    //var posHandle = this.shaderHandleRefs.posHandle;
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.shape.getVertexBufferObject());
+    gl.enableVertexAttribArray(this.shaderHandleRefs.posHandle);
+    gl.vertexAttribPointer(this.shaderHandleRefs.posHandle, wa.render.RenderConstants.FLOATS_PER_VTX, gl.FLOAT, false, 0, 0);
 
-    var colorBuffer = this.shape.getColorBufferObject()
-    var colorHandle = this.shaderHandleRefs.colorHandle;
-    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-    gl.enableVertexAttribArray(colorHandle);
-    gl.vertexAttribPointer(colorHandle, wa.render.RenderConstants.FLOATS_PER_COLOR, gl.FLOAT, false, 0, 0);
+    //var colorBuffer = this.shape.getColorBufferObject();
+    //var colorHandle = this.shaderHandleRefs.colorHandle;
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.shape.getColorBufferObject());
+    gl.enableVertexAttribArray(this.shaderHandleRefs.colorHandle);
+    gl.vertexAttribPointer(this.shaderHandleRefs.colorHandle, wa.render.RenderConstants.FLOATS_PER_COLOR, gl.FLOAT, false, 0, 0);
 
     // here we draw textures
     this.drawTexture(gl, this.shaderHandleRefs);
