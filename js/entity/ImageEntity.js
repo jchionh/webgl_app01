@@ -132,6 +132,7 @@ wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
 
     if (this.position[v.Z] > 0.0 || this.position[v.Z] < -1000.0) {
         this.direction *= -1.0;
+        this.rotationSpeed = Math.random() * 0.003;
         this.translateSpeed = Math.random() * 8.0;
         this.position[v.Z] += (this.direction * 8.5);
     }
