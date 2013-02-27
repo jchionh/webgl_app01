@@ -25,11 +25,36 @@ wa.entity.ImageEntity = function() {
     // it's inited with the default untextured 1x1 white texture
     this.texture = wa.gTextureLibrary.getTexture(wa.render.RenderConstants.DEFAULT_TEXTURE_ID);
 
+    this.rotationSpeed = 0.0;
+
     var that = this;
     this.image.onload = function() {
-        //that.setDimensions(that.image.width, that.image.height);
-        // onload, add this image to the textture library
-        // and get a texture object in return for drawing
+        // cache the values
+        var imageWidth = that.image.width * 1.0;
+        var imageHeight = that.image.height * 1.0;
+
+        // when we get an image, we'll need to scale it down to our max texture dimension
+        var widthScale =  wa.render.RenderConstants.MAX_TEXTURE_DIMENSION / imageWidth;
+        var heightScale = wa.render.RenderConstants.MAX_TEXTURE_DIMENSION / imageHeight;
+        // we'll choose the smallest scale to scale both dimesnions down
+        var scale = widthScale < heightScale ? widthScale : heightScale;
+        // we apply the scale only if we need to scale down to fit the maximum dims
+        scale = scale < 1.0 ? scale : 1.0;
+        var scaledImageWidth = imageWidth * scale;
+        var scaledImageHeight = imageHeight * scale;
+        that.image.width = Math.floor(scaledImageWidth);
+        that.image.height = Math.floor(scaledImageHeight);
+
+        // now let's set our quad dimensions based on scaled image loaded values
+        var quadWidthScale = wa.render.RenderConstants.MAX_QUAD_DIMENSION / scaledImageWidth;
+        var quadHeightScale = wa.render.RenderConstants.MAX_QUAD_DIMENSION / scaledImageHeight;
+        var quadScale = quadWidthScale < quadHeightScale ? quadWidthScale : quadHeightScale;
+        quadScale = quadScale < 1.0 ? quadScale : 1.0;
+        var scaledQuadWidth = scaledImageWidth * quadScale;
+        var scaledQuadHeight = scaledImageHeight * quadScale;
+
+        that.setDimensions(Math.floor(scaledQuadWidth), Math.floor(scaledQuadHeight));
+
         var texture = wa.gTextureLibrary.addTexture(that.image);
         //console.log("w: " + that.image.width + " h: " + that.image.height);
         that.texture = texture;
@@ -83,4 +108,27 @@ wa.entity.ImageEntity.prototype.drawTexture = function(gl, shaderHandleRefs) {
     // and send this tex matrix up into the shader
     gl.uniformMatrix4fv(shaderHandleRefs.texMatrixHandle, false, this.texMatrix);
 };
+
+
+/**
+ * @override
+ * @param {WebGLRenderingContext} gl
+ * @param {wa.render.Renderer} renderer
+ */
+wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
+
+    this.orientation[o.PITCH] += this.rotationSpeed;
+    if (this.orientation[o.PITCH] > 360.0) {
+        this.orientation[o.PITCH] -= 360.0 - this.orientation[o.PITCH];
+    }
+
+    this.orientation[o.ROLL] += this.rotationSpeed;
+    if (this.orientation[o.ROLL] > 360.0) {
+        this.orientation[o.ROLL] -= 360.0 - this.orientation[o.ROLL];
+    }
+
+    // call the super class draw
+    wa.render.SceneNode.prototype.draw.call(this, gl, renderer);
+};
+
 

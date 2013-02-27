@@ -58,26 +58,27 @@ function mainInit() {
     wa.gScene = new wa.render.Scene();
     // test a new scene node
     var root = wa.gScene.getRoot();
-    var imageEntity = new wa.entity.ImageEntity();
-    imageEntity.setDimensions(100, 100);
-    imageEntity.loadImageURL("images/stones2133.jpg");
 
+    var canvasWidth = wa.gCanvasElement.width * 1.0;
+    var halfCanvasWidth = canvasWidth / 2.0;
+    var canvasHeight = wa.gCanvasElement.height * 1.0;
+    var halfCanvasHeight = canvasHeight / 2.0;
 
+    // now init all our images in the imageList
+    for (var i = 0; i < wa.data.ImageListURLs.length; ++i) {
+        var imageEntity = new wa.entity.ImageEntity();
+        // load images
+        imageEntity.loadImageURL(wa.data.ImageListURLs[i]);
 
-    var imageEntity2 = new wa.entity.ImageEntity();
-    imageEntity2.setDimensions(100, 100);
-    imageEntity2.position[v.X] = -250;
-    imageEntity2.loadImageURL("images/placeholder.png");
+        // randomize positions
+        imageEntity.position[v.X] = Math.floor(Math.random() * canvasWidth) - halfCanvasWidth;
+        imageEntity.position[v.Y] = Math.floor(Math.random() * canvasHeight) - halfCanvasHeight;
+        imageEntity.position[v.Z] = Math.floor(Math.random() * -200.0);
+        imageEntity.rotationSpeed = Math.random() * 0.1;
 
-    var imageEntity3 = new wa.entity.ImageEntity();
-    imageEntity3.setDimensions(100, 100);
-    imageEntity3.position[v.Y] = 25;
-    imageEntity3.position[v.X] = -100;
-    imageEntity3.position[v.Z] = -100;
-
-    wa.utils.inList.addChild(root, imageEntity);
-    wa.utils.inList.addChild(root, imageEntity2);
-    wa.utils.inList.addChild(root, imageEntity3);
+        // add to our scene
+        wa.utils.inList.addChild(root, imageEntity);
+    }
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());

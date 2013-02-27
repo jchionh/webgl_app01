@@ -1,0 +1,75 @@
+reference:
+
+var fileInput = document.getElementById('file-input');
+ var thumbCanvas = document.getElementById('thumb-canvas');
+ var windowURL = window.URL || window.webkitURL;
+
+ fileInput.onchange = function() {
+ 	// Get the first file object
+ 	var file = fileInput.files[0];
+
+ 	if(!file) {
+ 		return;
+ 	}
+
+ 	// Create url for file object. The lifespan of the url is tied to this document.
+ 	var url = windowURL.createObjectURL(file);
+ 	var context = thumbCanvas.getContext('2d');
+ 	var image = new Image();
+
+ 	image.onload = function() {
+ 		// Target dimensions as an object { width: x, height y }
+ 		var dimensions = getDimensions();
+ 		// Scale dimensions while keeping the aspect ratio. In this example the image is scaled
+ 		// to be small as possible, while still filling out the entire target area.
+ 		var scaledDimensions = scale(image, dimensions.width, dimensions.height);
+
+ 		// Set the canvas to the desired size
+ 		thumbCanvas.setAttribute('width', scaledDimensions.width);
+ 		thumbCanvas.setAttribute('height', scaledDimensions.height);
+
+ 		// Draw the image on the canvas
+ 		context.drawImage(image, 0, 0, scaledDimensions.width, scaledDimensions.height);
+
+ 		// Get the base64 encoded data url
+ 		var data = thumbCanvas.toDataURL('image/png');
+
+ 		document.getElementById('thumb-image').setAttribute('src', data);
+ 	};
+
+ 	// Load image so that we can access image.width and image.height
+ 	image.src = url;
+ };
+
+
+ /*
+  public void resizeForScale() {
+
+  float meshHeight = quadMesh.getHeight();
+  float meshWidth = quadMesh.getWidth();
+  float heightScale = textureHeight / meshHeight;
+  float widthScale = textureWidth / meshWidth;
+  float scaleFactor = 1.0f;
+
+  switch (scaleMode) {
+  case SCALE_TO_FIT:
+  scaleFactor = Math.max(heightScale, widthScale);
+  break;
+  case SCALE_TO_FILL:
+  scaleFactor = Math.min(heightScale, widthScale);
+  break;
+  }
+
+  float invWidthScale = (1.0f / widthScale) * scaleFactor;
+  float invHeightScale = (1.0f / heightScale) * scaleFactor;
+
+  // then set our texture scale transform here
+  setTexScale(invWidthScale, invHeightScale);
+
+  // now we need to translate to the center
+  float meshCenterX = invWidthScale / 2.0f;
+  float meshCenterY = invHeightScale / 2.0f;
+  setTexTranslate(0.5f - meshCenterX, 0.5f - meshCenterY);
+  }
+  */
+
