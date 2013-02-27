@@ -73,8 +73,9 @@ function mainInit() {
         // randomize positions
         imageEntity.position[v.X] = Math.floor(Math.random() * canvasWidth) - halfCanvasWidth;
         imageEntity.position[v.Y] = Math.floor(Math.random() * canvasHeight) - halfCanvasHeight;
-        imageEntity.position[v.Z] = Math.floor(Math.random() * -200.0);
+        imageEntity.position[v.Z] = Math.floor(Math.random() * -1000.0);
         imageEntity.rotationSpeed = Math.random() * 0.003;
+        imageEntity.translateSpeed = Math.random() * 10.0;
 
         // add to our scene
         wa.utils.inList.addChild(root, imageEntity);

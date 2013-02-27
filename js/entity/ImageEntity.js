@@ -26,6 +26,8 @@ wa.entity.ImageEntity = function() {
     this.texture = wa.gTextureLibrary.getTexture(wa.render.RenderConstants.DEFAULT_TEXTURE_ID);
 
     this.rotationSpeed = 0.0;
+    this.translateSpeed = 1.0;
+    this.direction = -1;
 
     var that = this;
     this.image.onload = function() {
@@ -126,6 +128,15 @@ wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
     if (this.orientation[o.ROLL] < 0.0) {
         this.orientation[o.ROLL] += (360.0 - this.orientation[o.ROLL]);
     }
+
+
+    if (this.position[v.Z] > 0.0 || this.position[v.Z] < -1000.0) {
+        this.direction *= -1.0;
+        this.translateSpeed = Math.random() * 10.0;
+        this.position[v.Z] += (this.direction * 10.5);
+    }
+    this.position[v.Z] += (this.direction * this.translateSpeed);
+
 
     // call the super class draw
     wa.render.SceneNode.prototype.draw.call(this, gl, renderer);
