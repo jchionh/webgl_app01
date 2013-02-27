@@ -119,12 +119,12 @@ wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
 
     this.orientation[o.PITCH] += this.rotationSpeed;
     if (this.orientation[o.PITCH] > 360.0) {
-        this.orientation[o.PITCH] -= 360.0 - this.orientation[o.PITCH];
+        this.orientation[o.PITCH] -= (this.orientation[o.PITCH] - 360.0);
     }
 
-    this.orientation[o.ROLL] += this.rotationSpeed;
-    if (this.orientation[o.ROLL] > 360.0) {
-        this.orientation[o.ROLL] -= 360.0 - this.orientation[o.ROLL];
+    this.orientation[o.ROLL] -= this.rotationSpeed;
+    if (this.orientation[o.ROLL] < 0.0) {
+        this.orientation[o.ROLL] += (360.0 - this.orientation[o.ROLL]);
     }
 
     // call the super class draw
