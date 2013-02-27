@@ -8,14 +8,14 @@
 wa.data = wa.data || {};
 
 wa.data.ImageListURLs = [
-    "images/autumn_leaves_00195.jpg",
+    //"images/autumn_leaves_00195.jpg",
     "images/frost_covered_ivy_176967.jpg",
     "images/frost_covered_plants_177063.jpg",
     "images/frost_oak_leaf_winter_218310.jpg",
     "images/natureflowers1342.jpg",
     "images/stones2133.jpg",
-    "images/forest3083.jpg",
+    //"images/forest3083.jpg",
     "images/natureflower1344.jpg",
-    "images/natureflowerblue1339.jpg",
-    "images/snowdorp00375.jpg"
+    //"images/snowdorp00375.jpg"
+    "images/natureflowerblue1339.jpg"
 ];
