@@ -73,3 +73,57 @@ var fileInput = document.getElementById('file-input');
   }
   */
 
+
+
+
+While OpenGL 2.0 and later for the desktop offer full support for non-power-of-two (NPOT) textures, OpenGL ES 2.0 and WebGL have only limited NPOT support. The restrictions are defined in Sections 3.8.2, "Shader Execution", and 3.7.11, "Mipmap Generation", of the OpenGL ES 2.0 specification, and are summarized here:
+generateMipmap(target) generates an INVALID_OPERATION error if the level 0 image of the texture currently bound to target has an NPOT width or height.
+Sampling an NPOT texture in a shader will produce the RGBA color (0, 0, 0, 1) if:
+The minification filter is set to anything but NEAREST or LINEAR: in other words, if it uses one of the mipmapped filters.
+The repeat mode is set to anything but CLAMP_TO_EDGE; repeating NPOT textures are not supported.
+If your application doesn't require the REPEAT wrap mode, and can tolerate the lack of mipmaps, then you can simply configure the WebGLTexture object appropriately at creation time:
+
+
+function createTextureFromImage(image) {
+    var texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    if (!isPowerOfTwo(image.width) || !isPowerOfTwo(image.height)) {
+        // Scale up the texture to the next highest power of two dimensions.
+        var canvas = document.createElement("canvas");
+        canvas.width = nextHighestPowerOfTwo(image.width);
+        canvas.height = nextHighestPowerOfTwo(image.height);
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(image, 0, 0, image.width, image.height);
+        image = canvas;
+    }
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    return texture;
+}
+
+function isPowerOfTwo(x) {
+    return (x & (x - 1)) == 0;
+}
+
+function nextHighestPowerOfTwo(x) {
+    --x;
+    for (var i = 1; i < 32; i <<= 1) {
+        x = x | x >> i;
+    }
+    return x + 1;
+}
+
+
+
+
+
+gl.bindTexture(gl.TEXTURE_2D, textures[2]);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textures[2].image);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_NEAREST);
+    gl.generateMipmap(gl.TEXTURE_2D);
+
+
+
+    
