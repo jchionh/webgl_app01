@@ -41,8 +41,9 @@ wa.cache.TextureLibrary.prototype.getTexture = function(textureId) {
  * 4. create a new texture object
  * 5. store it in the library
  * @param {Image} image
+ * @param {Boolean} genMipMaps
  */
-wa.cache.TextureLibrary.prototype.addTexture = function(image) {
+wa.cache.TextureLibrary.prototype.addTexture = function(image, genMipMaps) {
     var textureId = image.src;
     var texture = this.getTexture(textureId);
     // if we have an existing texture, let's return it
@@ -50,15 +51,20 @@ wa.cache.TextureLibrary.prototype.addTexture = function(image) {
         return texture;
     }
 
+    var minFilter = genMipMaps ? this.gl.LINEAR_MIPMAP_NEAREST : this.gl.LINEAR;
+
     // we do not have an existing texture, load it to GPU
     var textureHandle = this.gl.createTexture();
     this.gl.bindTexture(this.gl.TEXTURE_2D, textureHandle);
     // Set the parameters so we can render any size image.
     this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
     this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, minFilter);
     this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
     this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image);
+    if (genMipMaps) {
+        this.gl.generateMipmap(this.gl.TEXTURE_2D);
+    }
     // create the texture object
     texture = new wa.texture.Texture();
     texture.textureHandle = textureHandle;

@@ -65,6 +65,7 @@ function mainInit() {
     var halfCanvasHeight = canvasHeight / 2.0;
 
     // now init all our images in the imageList
+
     for (var i = 0; i < wa.data.ImageListURLs.length; ++i) {
         var imageEntity = new wa.entity.ImageEntity();
         // load images
@@ -80,6 +81,13 @@ function mainInit() {
         // add to our scene
         wa.utils.inList.addChild(root, imageEntity);
     }
+
+    /*
+    var imageEntity = new wa.entity.ImageEntity();
+    imageEntity.setDimensions(798, 598);
+    wa.utils.inList.addChild(root, imageEntity);
+    */
+
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());

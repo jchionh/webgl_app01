@@ -42,14 +42,38 @@ wa.entity.ImageEntity = function() {
         var scale = widthScale < heightScale ? widthScale : heightScale;
         // we apply the scale only if we need to scale down to fit the maximum dims
         scale = scale < 1.0 ? scale : 1.0;
-        var scaledImageWidth = imageWidth * scale;
-        var scaledImageHeight = imageHeight * scale;
-        that.image.width = Math.floor(scaledImageWidth);
-        that.image.height = Math.floor(scaledImageHeight);
+        var scaledImageWidth = Math.floor(imageWidth * scale);
+        var scaledImageHeight = Math.floor(imageHeight * scale);
+        //that.image.width = Math.floor(scaledImageWidth);
+        //that.image.height = Math.floor(scaledImageHeight);
+
+        var addToLibraryNext = true;
+
+        var scaledImage = that.image;
+        if (!wa.utils.isPowerOfTwo(scaledImageWidth) || !wa.utils.isPowerOfTwo(scaledImageHeight)) {
+            // now create a new scaled image
+            var scaledCanvas = document.createElement("canvas");
+            scaledCanvas.width = wa.utils.nextHighestPowerOfTwo(scaledImageWidth);
+            that.texScale[v.X] =  (scaledImageWidth * 1.0) / (scaledCanvas.width * 1.0);
+            //scaledImageWidth = scaledCanvas.width;
+            scaledCanvas.height = wa.utils.nextHighestPowerOfTwo(scaledImageHeight);
+            that.texScale[v.Y] =  (scaledImageHeight * 1.0) / (scaledCanvas.height * 1.0);
+            //scaledImageHeight = scaledCanvas.height;
+            var scaledCtx = scaledCanvas.getContext("2d");
+            scaledCtx.drawImage(scaledImage, 0, 0, scaledImageWidth, scaledImageHeight);
+            scaledImage = new Image();
+            scaledImage.src = scaledCanvas.toDataURL();
+            addToLibraryNext = false;
+            scaledImage.onload = function() {
+                var texture = wa.gTextureLibrary.addTexture(scaledImage, true);
+                //console.log("w: " + that.image.width + " h: " + that.image.height);
+                that.texture = texture;
+            }
+        }
 
         // now let's set our quad dimensions based on scaled image loaded values
-        var quadWidthScale = wa.render.RenderConstants.MAX_QUAD_DIMENSION / scaledImageWidth;
-        var quadHeightScale = wa.render.RenderConstants.MAX_QUAD_DIMENSION / scaledImageHeight;
+        var quadWidthScale = wa.render.RenderConstants.MAX_QUAD_DIMENSION / scaledImageWidth * 1.0;
+        var quadHeightScale = wa.render.RenderConstants.MAX_QUAD_DIMENSION / scaledImageHeight * 1.0;
         var quadScale = quadWidthScale < quadHeightScale ? quadWidthScale : quadHeightScale;
         quadScale = quadScale < 1.0 ? quadScale : 1.0;
         var scaledQuadWidth = scaledImageWidth * quadScale;
@@ -57,9 +81,11 @@ wa.entity.ImageEntity = function() {
 
         that.setDimensions(Math.floor(scaledQuadWidth), Math.floor(scaledQuadHeight));
 
-        var texture = wa.gTextureLibrary.addTexture(that.image);
-        //console.log("w: " + that.image.width + " h: " + that.image.height);
-        that.texture = texture;
+        if (addToLibraryNext) {
+            var texture = wa.gTextureLibrary.addTexture(scaledImage, false);
+            //console.log("w: " + that.image.width + " h: " + that.image.height);
+            that.texture = texture;
+        }
     };
 };
 
@@ -119,6 +145,8 @@ wa.entity.ImageEntity.prototype.drawTexture = function(gl, shaderHandleRefs) {
  */
 wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
 
+
+
     this.orientation[o.PITCH] += this.rotationSpeed;
     if (this.orientation[o.PITCH] > 360.0) {
         this.orientation[o.PITCH] -= (this.orientation[o.PITCH] - 360.0);
@@ -137,6 +165,7 @@ wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
         this.position[v.Z] += (this.direction * 5.5);
     }
     this.position[v.Z] += (this.direction * this.translateSpeed);
+
 
 
     // call the super class draw

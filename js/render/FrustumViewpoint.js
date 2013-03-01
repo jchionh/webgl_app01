@@ -49,7 +49,7 @@ wa.render.FrustumViewpoint.prototype.calcViewProjMatrix = function() {
     // we compute a world scale that will map all world units on the XY plane at z=0
     // to be 1-1 mapping of pixel units on screen.
     var xExtentAtZeroZ = this.aspectRatio * this.position[v.Z];
-    var mapScale = xExtentAtZeroZ / (this.width / 2.0);
+    var mapScale = (xExtentAtZeroZ / (this.width / 2.0)) * 0.414375;
     // mapScale will scale units to 1-1 pixel mapping on the XY plane
     this.setWorldScale(mapScale, mapScale, mapScale);
 
