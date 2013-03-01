@@ -51,7 +51,7 @@ wa.cache.TextureLibrary.prototype.addTexture = function(image, genMipMaps) {
         return texture;
     }
 
-    var minFilter = genMipMaps ? this.gl.LINEAR_MIPMAP_NEAREST : this.gl.LINEAR;
+    var minFilter = genMipMaps ? this.gl.LINEAR_MIPMAP_LINEAR : this.gl.LINEAR;
 
     // we do not have an existing texture, load it to GPU
     var textureHandle = this.gl.createTexture();
