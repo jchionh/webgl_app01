@@ -103,7 +103,7 @@ function mainLoop(timestamp) {
     wa.gPrevTimestamp = timestamp;
 
     // just a test of updating the title so we know our mainloop is running
-    wa.gTitleElement.innerHTML = wa.gDELTA_TEXT + wa.gDelta;
+    wa.gTitleElement.innerHTML = wa.gDelta;
     // request animation for the next loop call
     // note: requestAnimFrame is a polyfill for cross browser
     // the actual function name is requestAnimationFrame
