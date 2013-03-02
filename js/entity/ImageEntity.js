@@ -62,7 +62,7 @@ wa.entity.ImageEntity = function() {
             var scaledCtx = scaledCanvas.getContext("2d");
             scaledCtx.drawImage(scaledImage, 0, 0, scaledImageWidth, scaledImageHeight);
             scaledImage = new Image();
-            scaledImage.src = scaledCanvas.toDataURL();
+            scaledImage.src = scaledCanvas.toDataURL("image/jpeg");
             addToLibraryNext = false;
             scaledImage.onload = function() {
                 var texture = wa.gTextureLibrary.addTexture(scaledImage, true);
