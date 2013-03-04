@@ -119,6 +119,11 @@ wa.input.MouseInput.prototype.mouseMove = function(e) {
     // then set our previous position
     vec3.set(this.mousePos, this.mousePrevPos);
 
+    /*
+    if (this.isMouseDown) {
+        console.log("[move] x: " + this.mousePos[v.X] + " y: " + this.mousePos[v.Y] + " dx: " + this.mouseDelta[v.X] + " dy: " + this.mouseDelta[v.Y]);
+    }
+    */
     //console.log("[move] x: " + this.mousePos[v.X] + " y: " + this.mousePos[v.Y] + " dx: " + this.mouseDelta[v.X] + " dy: " + this.mouseDelta[v.Y]);
 };
 
@@ -129,7 +134,7 @@ wa.input.MouseInput.prototype.mouseMove = function(e) {
 wa.input.MouseInput.prototype.mouseUp = function(e) {
     this.isMouseDown = false;
     //console.log('mouse is up!');
-}
+};
 
 /**
  * on mouse down
