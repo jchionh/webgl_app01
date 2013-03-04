@@ -6,6 +6,41 @@
 // namespace
 wa.runstate = wa.runstate || {};
 
+/**
+ * StateRunner class
+ *
+ * maintains a stack of states and runs
+ * onStart()
+ * onStop()
+ * onUpdate()
+ * onRender()
+ *
+ * on the sates.
+ *
+ * onStart() is called once when the state is added to the stack
+ * onStop() is called once when state is removed from the stack
+ *
+ * onUpdate(dt) is called for every loop with the deltaTime elapsed
+ * onRender(dt, ctx) is called for every loop
+ *
+ * on remove of a state, we also remove all states on top of it towards the
+ * top of the stack
+ *
+ * this allows the onStop() of a state to remove it's child states
+ *
+ * for example
+ *
+ * -- top of stack ---
+ * GUI Run State
+ * Game Run State
+ * OtherStates
+ * -- bottom of stack --
+ *
+ * if Game Run State ends, it will also remove GUI Run State that is running on top
+ * of it.
+ *
+ * @constructor
+ */
 wa.runstate.StateRunner = function() {
 
     /**
