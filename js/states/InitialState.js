@@ -4,32 +4,33 @@
  * Time: 10:19 PM
  */
 // namesapce
-wa.runstate = wa.runstate || {};
-wa.runstate.states = wa.runstate.states || {};
+wa.states = wa.states || {};
 
 /**
  * initial run state in the stack, does nothing
  * @constructor
  * @extends wa.runstate.GLRunState
  */
-wa.runstate.states.InitialState = function() {
+wa.states.InitialState = function() {
     // call the super class init
     wa.runstate.GLRunState.call(this, wa.runstate.RunFlag.SUSPEND_LOWER);
 };
 
 // extend from GLRunState
-wa.utils.extend(wa.runstate.states.InitialState, wa.runstate.GLRunState);
+wa.utils.extend(wa.states.InitialState, wa.runstate.GLRunState);
 
 /**
  * onstart
+ * @override
  */
-wa.runstate.states.InitialState.prototype.onStart = function() {
+wa.states.InitialState.prototype.onStart = function() {
     console.log('InitialSate::onStart');
 };
 
 /**
  * onstop
+ * @override
  */
-wa.runstate.states.InitialState.prototype.onStop = function() {
+wa.states.InitialState.prototype.onStop = function() {
     console.log('InitialSate::onStop');
 };

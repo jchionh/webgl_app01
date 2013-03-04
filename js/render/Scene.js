@@ -31,3 +31,10 @@ wa.render.Scene.prototype.getRoot = function() {
 wa.render.Scene.prototype.add = function(sceneNode) {
 
 };
+
+// release our entire scene
+wa.render.Scene.prototype.release = function() {
+    this.nRoot.firstChild = null;
+    this.nRoot.nParent = null;
+    this.nRoot.nSibling = null;
+};

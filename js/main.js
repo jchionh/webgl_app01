@@ -55,7 +55,7 @@ function mainInit() {
      *
      * @type {wa.runstate.BaseRunState}
      */
-    var initialRunState = new wa.runstate.states.InitialState();
+    var initialRunState = new wa.states.InitialState();
     wa.gStateRunner.addState(initialRunState);
 
     // new a furstrum viewpoint
@@ -69,46 +69,8 @@ function mainInit() {
     // set our viewpoint into the renderer
     wa.gRenderer.setViewpoint(gl, wa.gViewpoint);
 
-
-    // init a scene for the renderer to render
-    wa.gScene = new wa.render.Scene();
-    // test a new scene node
-    var root = wa.gScene.getRoot();
-
-    var canvasWidth = wa.gCanvasElement.width * 1.0;
-    var halfCanvasWidth = canvasWidth / 2.0;
-    var canvasHeight = wa.gCanvasElement.height * 1.0;
-    var halfCanvasHeight = canvasHeight / 2.0;
-
-    // now init all our images in the imageList
-
-    for (var i = 0; i < wa.data.ImageListURLs.length; ++i) {
-        var imageEntity = new wa.entity.ImageEntity();
-        // load images
-        imageEntity.loadImageURL(wa.data.ImageListURLs[i]);
-
-        // randomize positions
-        imageEntity.position[v.X] = Math.floor(Math.random() * canvasWidth) - halfCanvasWidth;
-        imageEntity.position[v.Y] = Math.floor(Math.random() * canvasHeight) - halfCanvasHeight;
-        imageEntity.position[v.Z] = Math.floor(Math.random() * -1000.0);
-        imageEntity.rotationSpeed = Math.random() * 0.003;
-        imageEntity.translateSpeed = Math.random() * 5.0;
-
-        // add to our scene
-        wa.utils.inList.addChild(root, imageEntity);
-    }
-
-    /*
-    var imageEntity = new wa.entity.ImageEntity();
-    imageEntity.setDimensions(798, 598);
-    wa.utils.inList.addChild(root, imageEntity);
-    */
-
-    /*
-    var runstate  = new wa.runstate.GLRunState();
-    runstate.onRender(null, null);
-    */
-
+    // add a floaty images state
+    wa.gStateRunner.addState(new wa.states.FloatyImages());
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
@@ -136,10 +98,13 @@ function mainLoop(timestamp) {
     // then perform state renders
     wa.gStateRunner.render(wa.gDelta, gl);
 
-    // now perform our actions here
-    wa.gRenderer.render(gl, wa.gScene);
-
     // clear input states
     wa.gInputManager.clearStates();
+}
+
+function switchState() {
+    if (wa.gStateRunner !== null) {
+        wa.gStateRunner.switchState(new wa.states.FloatyImages());
+    }
 }
 

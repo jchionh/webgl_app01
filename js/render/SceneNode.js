@@ -62,6 +62,27 @@ wa.render.SceneNode = function() {
 // perform prototype extend
 wa.utils.extend(wa.render.SceneNode, wa.utils.IntrusiveListNode);
 
+
+/**
+ * release anything that we're holding on to
+ */
+wa.render.SceneNode.prototype.release = function() {
+    // call super class release
+    // wa.utils.IntrusiveListNode.prototype.release.call(this);
+    //console.log('SceneNode::release');
+    this.position = null;
+    this.scale = null;
+    this.orientation = null;
+    this.texTranslate = null;
+    this.texRotate = null;
+    this.texScale = null;
+    this.modelMatrix = null;
+    this.texMatrix = null;
+    this.mvpMatrix = null;
+    this.shape = null;
+    this.shaderHandleRefs = null;
+};
+
 /**
  * here we calculate our model matrix
  */

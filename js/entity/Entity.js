@@ -18,3 +18,12 @@ wa.entity.Entity = function() {
 
 // extends entity to scene node
 wa.utils.extend(wa.entity.Entity, wa.render.SceneNode);
+
+// entity declares an update function
+/**
+ * update function takes a delta time
+ * @param {number} dt
+ */
+wa.entity.Entity.prototype.update = function(dt) {
+
+};

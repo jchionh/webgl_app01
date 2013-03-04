@@ -45,6 +45,15 @@ wa.runstate.StateRunner.prototype.addState = function(state) {
 };
 
 /**
+ * switch state pops the topmost state and replaces that with the new state
+ * @param {wa.runstate.BaseRunState} state
+ */
+wa.runstate.StateRunner.prototype.switchState = function(state) {
+    this.popState();
+    this.addState(state);
+};
+
+/**
  * we remove the top state here
  */
 wa.runstate.StateRunner.prototype.popState = function() {

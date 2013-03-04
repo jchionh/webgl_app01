@@ -29,11 +29,11 @@ wa.entity.ImageEntity = function() {
     this.translateSpeed = 1.0;
     this.direction = -1;
 
-    var that = this;
+    var self = this;
     this.image.onload = function() {
         // cache the values
-        var imageWidth = that.image.width * 1.0;
-        var imageHeight = that.image.height * 1.0;
+        var imageWidth = self.image.width * 1.0;
+        var imageHeight = self.image.height * 1.0;
 
         // when we get an image, we'll need to scale it down to our max texture dimension
         var widthScale =  wa.render.RenderConstants.MAX_TEXTURE_DIMENSION / imageWidth;
@@ -44,20 +44,23 @@ wa.entity.ImageEntity = function() {
         scale = scale < 1.0 ? scale : 1.0;
         var scaledImageWidth = Math.floor(imageWidth * scale);
         var scaledImageHeight = Math.floor(imageHeight * scale);
-        //that.image.width = Math.floor(scaledImageWidth);
-        //that.image.height = Math.floor(scaledImageHeight);
+        //self.image.width = Math.floor(scaledImageWidth);
+        //self.image.height = Math.floor(scaledImageHeight);
+
+        // cache our original source, for setting of id
+        var originalSrc = self.image.src;
 
         var addToLibraryNext = true;
 
-        var scaledImage = that.image;
+        var scaledImage = self.image;
         if (!wa.utils.isPowerOfTwo(scaledImageWidth) || !wa.utils.isPowerOfTwo(scaledImageHeight)) {
             // now create a new scaled image
             var scaledCanvas = document.createElement("canvas");
             scaledCanvas.width = wa.utils.nextHighestPowerOfTwo(scaledImageWidth);
-            that.texScale[v.X] =  (scaledImageWidth * 1.0) / (scaledCanvas.width * 1.0);
+            self.texScale[v.X] =  (scaledImageWidth * 1.0) / (scaledCanvas.width * 1.0);
             //scaledImageWidth = scaledCanvas.width;
             scaledCanvas.height = wa.utils.nextHighestPowerOfTwo(scaledImageHeight);
-            that.texScale[v.Y] =  (scaledImageHeight * 1.0) / (scaledCanvas.height * 1.0);
+            self.texScale[v.Y] =  (scaledImageHeight * 1.0) / (scaledCanvas.height * 1.0);
             //scaledImageHeight = scaledCanvas.height;
             var scaledCtx = scaledCanvas.getContext("2d");
             scaledCtx.drawImage(scaledImage, 0, 0, scaledImageWidth, scaledImageHeight);
@@ -65,9 +68,9 @@ wa.entity.ImageEntity = function() {
             scaledImage.src = scaledCanvas.toDataURL("image/jpeg");
             addToLibraryNext = false;
             scaledImage.onload = function() {
-                var texture = wa.gTextureLibrary.addTexture(scaledImage, true);
-                //console.log("w: " + that.image.width + " h: " + that.image.height);
-                that.texture = texture;
+                var texture = wa.gTextureLibrary.addTexture(originalSrc, scaledImage, true);
+                //console.log("w: " + self.image.width + " h: " + self.image.height);
+                self.texture = texture;
             }
         }
 
@@ -79,18 +82,31 @@ wa.entity.ImageEntity = function() {
         var scaledQuadWidth = scaledImageWidth * quadScale;
         var scaledQuadHeight = scaledImageHeight * quadScale;
 
-        that.setDimensions(Math.floor(scaledQuadWidth), Math.floor(scaledQuadHeight));
+        self.setDimensions(Math.floor(scaledQuadWidth), Math.floor(scaledQuadHeight));
 
         if (addToLibraryNext) {
-            var texture = wa.gTextureLibrary.addTexture(scaledImage, false);
-            //console.log("w: " + that.image.width + " h: " + that.image.height);
-            that.texture = texture;
+            var texture = wa.gTextureLibrary.addTexture(originalSrc, scaledImage, false);
+            //console.log("w: " + self.image.width + " h: " + self.image.height);
+            self.texture = texture;
         }
     };
 };
 
 // extend image entity from entity
 wa.utils.extend(wa.entity.ImageEntity, wa.entity.Entity);
+
+/**
+ * release resources that we're holding on to
+ * @override
+ */
+wa.entity.ImageEntity.prototype.release = function() {
+    // call super release
+    wa.entity.Entity.prototype.release.call(this);
+    //console.log('ImageEntity::release');
+    this.shape = null;
+    this.image = null;
+    this.texture = null;
+};
 
 /**
  * set the image dimensions
@@ -137,16 +153,12 @@ wa.entity.ImageEntity.prototype.drawTexture = function(gl, shaderHandleRefs) {
     gl.uniformMatrix4fv(shaderHandleRefs.texMatrixHandle, false, this.texMatrix);
 };
 
-
 /**
+ * update
  * @override
- * @param {WebGLRenderingContext} gl
- * @param {wa.render.Renderer} renderer
+ * @param {number} dt
  */
-wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
-
-
-
+wa.entity.ImageEntity.prototype.update = function(dt) {
     this.orientation[o.PITCH] += this.rotationSpeed;
     if (this.orientation[o.PITCH] > 360.0) {
         this.orientation[o.PITCH] -= (this.orientation[o.PITCH] - 360.0);
@@ -157,7 +169,6 @@ wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
         this.orientation[o.ROLL] += (360.0 - this.orientation[o.ROLL]);
     }
 
-
     if (this.position[v.Z] > 0.0 || this.position[v.Z] < -1000.0) {
         this.direction *= -1.0;
         this.rotationSpeed = Math.random() * 0.003;
@@ -165,11 +176,19 @@ wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
         this.position[v.Z] += (this.direction * 5.5);
     }
     this.position[v.Z] += (this.direction * this.translateSpeed);
+};
 
 
-
+/**
+ * @override
+ * @param {WebGLRenderingContext} gl
+ * @param {wa.render.Renderer} renderer
+ */
+/*
+wa.entity.ImageEntity.prototype.draw = function(gl, renderer) {
     // call the super class draw
     wa.render.SceneNode.prototype.draw.call(this, gl, renderer);
 };
+*/
 
 

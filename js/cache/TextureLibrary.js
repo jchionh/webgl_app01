@@ -40,11 +40,11 @@ wa.cache.TextureLibrary.prototype.getTexture = function(textureId) {
  * 3. upload it to the GPU
  * 4. create a new texture object
  * 5. store it in the library
+ * @param {String} textureId
  * @param {Image} image
  * @param {Boolean} genMipMaps
  */
-wa.cache.TextureLibrary.prototype.addTexture = function(image, genMipMaps) {
-    var textureId = image.src;
+wa.cache.TextureLibrary.prototype.addTexture = function(textureId, image, genMipMaps) {
     var texture = this.getTexture(textureId);
     // if we have an existing texture, let's return it
     if (texture !== null) {
