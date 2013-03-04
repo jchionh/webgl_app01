@@ -12,21 +12,22 @@ gl = null;
  */
 function mainInit() {
     // initing our app globals
-    wa.gTitleElement = document.getElementsByTagName("title")[0];
-    wa.gSysMessageElement = document.getElementById("sysMessageArea");
+    wa.gTitleElement = document.getElementsByTagName('title')[0];
+    //wa.gSysMessageElement = document.getElementById('sysMessageArea');
     wa.gPrevTimestamp = 0;
     wa.gDelta = 0;
+    wa.gTrackedInputArea = document.getElementById('renderArea');
     wa.gCanvasElement = document.getElementById('renderCanvas');
     wa.gCanvasContext = wa.gCanvasElement.getContext('webgl');
 
     // now, use khronos helper to test for webGL support and setup the gl context
     gl = WebGLUtils.setupWebGL(wa.gCanvasElement);
     if (!gl) {
-        wa.gSysMessageElement.innerHTML = "Browser does not support WebGL";
+        //wa.gSysMessageElement.innerHTML = "Browser does not support WebGL";
         console.log("Browser does not support WebGL");
         return;
     } else {
-        wa.gSysMessageElement.innerHTML = "WebGL initialized.";
+        //wa.gSysMessageElement.innerHTML = "WebGL initialized.";
         console.log("WebGL initialized.");
     }
 
@@ -35,6 +36,10 @@ function mainInit() {
     wa.gClrLibrary = new wa.cache.QuadVertexColorBufferLibrary(gl);
     wa.gTexCoordLibrary = new wa.cache.QuadTexCoordBufferLibrary(gl);
     wa.gTextureLibrary = new wa.cache.TextureLibrary(gl);
+
+    // new our input manager
+    // REMEMBER TO RELEASE?
+    wa.gInputManager = new wa.input.InputManager(wa.gTrackedInputArea);
 
     // new our renderer
     wa.gRenderer = new wa.render.Renderer(gl);
@@ -111,5 +116,8 @@ function mainLoop(timestamp) {
 
     // now perform our actions here
     wa.gRenderer.render(gl, wa.gScene);
+
+    // clear input states
+    wa.gInputManager.clearStates();
 }
 

@@ -32,3 +32,9 @@ c.R = 0;
 c.G = 1;
 c.B = 2;
 c.A = 3;
+
+// constant zero vector
+v.ZERO = vec3.create();
+v.ZERO[0] = 0.0;
+v.ZERO[1] = 0.0;
+v.ZERO[2] = 0.0;

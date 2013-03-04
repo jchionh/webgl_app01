@@ -8,10 +8,11 @@
 var wa = wa || {};
 
 // here are our globals
-wa.gTitleElement = document.getElementsByTagName("title")[0];
-wa.gSysMessageElement = document.getElementById("sysMessageArea");
+wa.gTitleElement = document.getElementsByTagName('title')[0];
+//wa.gSysMessageElement = document.getElementById('sysMessageArea');
 wa.gPrevTimestamp = 0;
 wa.gDelta = 0;
+wa.gTrackedInputArea = document.getElementById('renderArea');
 wa.gCanvasElement = document.getElementById('renderCanvas');
 wa.gCanvasContext = wa.gCanvasElement.getContext('webgl');
 wa.gDELTA_TEXT = "d: ";
@@ -22,3 +23,4 @@ wa.gVtxLibrary = null;
 wa.gClrLibrary = null;
 wa.gTexCoordLibrary = null;
 wa.gTextureLibrary = null;
+wa.gInputManager = null;
