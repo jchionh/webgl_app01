@@ -100,7 +100,7 @@ function mainInit() {
 
 /**
  * this is our mainloop, that will be called with requestAnimationFrame
- * @param timestamp
+ * @param {number} timestamp
  */
 function mainLoop(timestamp) {
     // calculate our delta
