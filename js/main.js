@@ -19,6 +19,7 @@ function mainInit() {
     wa.gTrackedInputArea = document.getElementById('renderArea');
     wa.gCanvasElement = document.getElementById('renderCanvas');
     wa.gSelectState = document.getElementById('StateSelect');
+    wa.gMsgArea = document.getElementById('msgArea');
     wa.gCanvasContext = wa.gCanvasElement.getContext('webgl');
 
     // now, use khronos helper to test for webGL support and setup the gl context
@@ -110,10 +111,13 @@ function switchState() {
         switch (selectedState) {
             case 'FloatyImages':
                 wa.gStateRunner.switchState(new wa.states.FloatyImages());
+                wa.gMsgArea.innerHTML = '[' + selectedState + ']';
                 break;
 
             default:
-                console.log('state: [' + selectedState + '] not implemented yet.');
+                var msg = 'state: [' + selectedState + '] not implemented yet.';
+                console.log(msg);
+                wa.gMsgArea.innerHTML = msg;
                 break;
         }
     }
