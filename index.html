@@ -81,7 +81,15 @@
 
 <body class="unselectable">
 
-<div id="renderArea" style="position: absolute; left: 0px; top: 0px;">
+<span>Select state: </span>
+<select id="StateSelect" name="StateSelect">
+    <option selected="selected" value="FloatyImages">FloatyImages</option>
+    <option value="Slide">Slide</option>
+    <option value="Radial">Radial</option>
+</select>
+<button type="button" onclick="switchState();">Switch to State</button>
+
+<div id="renderArea" style="position: relative; left: 0px; top: 0px;">
     <!--<div id="hudBeforeCanvas" style="position: absolute; left: 0px; top: 0px; width: 800px; height: 600px;"></div> -->
     <canvas id="renderCanvas" width="1024" height="600" style="position: absolute; left: 0px; top: 0px;"></canvas>
 </div>
@@ -90,7 +98,7 @@
 </div>
 -->
 <div style="position: absolute; top: 620px; left: 0px;">source: <a href="https://github.com/jchionh/webgl_app01">https://github.com/jchionh/webgl_app01</a></div>
-<button type="button" style="position: absolute; top: 0px; left: 0px;" onclick="switchState()" >Reset State</button>
+
 
 
 <!-- js sources -->

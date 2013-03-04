@@ -18,6 +18,7 @@ function mainInit() {
     wa.gDelta = 0;
     wa.gTrackedInputArea = document.getElementById('renderArea');
     wa.gCanvasElement = document.getElementById('renderCanvas');
+    wa.gSelectState = document.getElementById('StateSelect');
     wa.gCanvasContext = wa.gCanvasElement.getContext('webgl');
 
     // now, use khronos helper to test for webGL support and setup the gl context
@@ -103,8 +104,18 @@ function mainLoop(timestamp) {
 }
 
 function switchState() {
+    var selectedState = wa.gSelectState.value;
+    //console.log('value: ' + selectedState);
     if (wa.gStateRunner !== null) {
-        wa.gStateRunner.switchState(new wa.states.FloatyImages());
+        switch (selectedState) {
+            case 'FloatyImages':
+                wa.gStateRunner.switchState(new wa.states.FloatyImages());
+                break;
+
+            default:
+                console.log('state: [' + selectedState + '] not implemented yet.');
+                break;
+        }
     }
 }
 

@@ -152,6 +152,7 @@ wa.runstate.StateRunner.prototype.checkAndRemove = function() {
              */
             var currentState = this.stack[i];
             currentState.onStop();
+            this.stack[i] = null;
         }
 
         // now we need to remove the states
