@@ -24,3 +24,4 @@ wa.gClrLibrary = null;
 wa.gTexCoordLibrary = null;
 wa.gTextureLibrary = null;
 wa.gInputManager = null;
+wa.gStateRunner = null;

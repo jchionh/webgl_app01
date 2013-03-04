@@ -47,6 +47,17 @@ function mainInit() {
     // init our renderer
     wa.gRenderer.initDefaultShaders(gl, "vtxShader", "fragShader");
 
+    // new our state runner
+    wa.gStateRunner = new wa.runstate.StateRunner();
+
+    // add a initial state to our state runner
+    /**
+     *
+     * @type {wa.runstate.BaseRunState}
+     */
+    var initialRunState = new wa.runstate.states.InitialState();
+    wa.gStateRunner.addState(initialRunState);
+
     // new a furstrum viewpoint
     wa.gViewpoint = new wa.render.FrustumViewpoint(wa.gCanvasElement.width, wa.gCanvasElement.height);
     wa.gViewpoint.updateViewMatrix();
@@ -118,6 +129,12 @@ function mainLoop(timestamp) {
     // note: requestAnimFrame is a polyfill for cross browser
     // the actual function name is requestAnimationFrame
     window.requestAnimFrame(mainLoop, wa.gCanvasElement);
+
+    // perform state updates
+    wa.gStateRunner.update(wa.gDelta);
+
+    // then perform state renders
+    wa.gStateRunner.render(wa.gDelta, gl);
 
     // now perform our actions here
     wa.gRenderer.render(gl, wa.gScene);

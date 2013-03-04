@@ -30,6 +30,6 @@ wa.utils.extend(wa.runstate.GLRunState, wa.runstate.BaseRunState);
  * @param {WebGLRenderingContext} gl
  */
 wa.runstate.GLRunState.prototype.onRender = function(dt, gl) {
-    console.log('GLRunState::onRender');
+    //console.log('GLRunState::onRender');
 };
 

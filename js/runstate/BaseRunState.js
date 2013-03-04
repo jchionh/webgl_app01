@@ -69,5 +69,13 @@ wa.runstate.BaseRunState.prototype.onUpdate = function(dt) {
  * @param {Object} ctx the rendering context, -- can be gl, or 2d canvas
  */
 wa.runstate.BaseRunState.prototype.onRender = function(dt, ctx) {
-    console.log('BaseRunState::onRender');
+    //console.log('BaseRunState::onRender');
+};
+
+/**
+ * do we suspend lower for this runstate?
+ * @return {Boolean}
+ */
+wa.runstate.BaseRunState.prototype.suspendLower = function() {
+    return this.runFlag === wa.runstate.RunFlag.SUSPEND_LOWER;
 };
