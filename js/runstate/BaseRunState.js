@@ -66,7 +66,8 @@ wa.runstate.BaseRunState.prototype.onUpdate = function(dt) {
  * onRender called every loop
  * this method is meant to do ONLY render calls
  * @param {number} dt
+ * @param {Object} ctx the rendering context, -- can be gl, or 2d canvas
  */
-wa.runstate.BaseRunState.prototype.onRender = function(dt) {
-
+wa.runstate.BaseRunState.prototype.onRender = function(dt, ctx) {
+    console.log('BaseRunState::onRender');
 };

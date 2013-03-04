@@ -93,6 +93,11 @@ function mainInit() {
     wa.utils.inList.addChild(root, imageEntity);
     */
 
+    /*
+    var runstate  = new wa.runstate.GLRunState();
+    runstate.onRender(null, null);
+    */
+
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
