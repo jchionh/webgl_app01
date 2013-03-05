@@ -140,8 +140,6 @@ wa.entity.ImageEntity.prototype.drawTexture = function(gl, shaderHandleRefs) {
     gl.bindTexture(gl.TEXTURE_2D, this.texture.textureHandle);
     gl.uniform1i(shaderHandleRefs.texSamplerHandle, 0);
 
-    //var texCoordBuffer = this.shape.getTexCoordBufferObject();
-    //var texCoordHandle = shaderHandleRefs.texCoordHandle;
     gl.bindBuffer(gl.ARRAY_BUFFER, this.shape.getTexCoordBufferObject());
     gl.enableVertexAttribArray(shaderHandleRefs.texCoordHandle);
     gl.vertexAttribPointer(shaderHandleRefs.texCoordHandle, wa.render.RenderConstants.FLOATS_PER_TEX_COORD, gl.FLOAT, false, 0, 0);
