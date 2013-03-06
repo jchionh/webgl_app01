@@ -31,6 +31,9 @@ wa.entity.ImageEntity = function() {
 
     var self = this;
     this.image.onload = function() {
+
+        // TODO: Move this chunk of code to a separate function
+
         // cache the values
         var imageWidth = self.image.width * 1.0;
         var imageHeight = self.image.height * 1.0;
