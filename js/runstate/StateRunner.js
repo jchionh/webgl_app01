@@ -162,12 +162,14 @@ wa.runstate.StateRunner.prototype.checkAndRemove = function() {
     // exited. if this state exited, we remove this state and all states above it
     var count = this.stack.length;
     var firstIndex = -1;
-    for (var i = 0; i < count; ++i) {
+    var currentState;
+    var i;
+    for (i = 0; i < count; ++i) {
         /**
          *
          * @type {wa.runstate.BaseRunState}
          */
-        var currentState = this.stack[i];
+        currentState = this.stack[i];
         if (currentState.stopped === true) {
             // save out our first index
             firstIndex = i;
@@ -180,12 +182,12 @@ wa.runstate.StateRunner.prototype.checkAndRemove = function() {
     if (firstIndex !== -1) {
         // now we need to loop from the top of the stack down to release
         // the states in the right order
-        for (var i = count - 1; i >= firstIndex; --i) {
+        for (i = count - 1; i >= firstIndex; --i) {
             /**
              *
              * @type {wa.runstate.BaseRunState}
              */
-            var currentState = this.stack[i];
+            currentState = this.stack[i];
             currentState.onStop();
             this.stack[i] = null;
         }
