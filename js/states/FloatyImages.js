@@ -36,9 +36,9 @@ wa.states.FloatyImages.prototype.onStart = function() {
     console.log('FloatyImages::onStart');
     var root = this.scene.getRoot();
 
-    var canvasWidth = wa.gCanvasElement.width * 1.0;
+    var canvasWidth = wa.gCanvasElement.clientWidth * 1.0;
     var halfCanvasWidth = canvasWidth / 2.0;
-    var canvasHeight = wa.gCanvasElement.height * 1.0;
+    var canvasHeight = wa.gCanvasElement.clientWidth * 1.0;
     var halfCanvasHeight = canvasHeight / 2.0;
 
     // now init all our images in the imageList

@@ -51,6 +51,10 @@ wa.render.FrustumViewpoint.prototype.calcViewProjMatrix = function() {
     var xExtentAtZeroZ = this.aspectRatio * this.position[v.Z];
     // the factor at the end =   sinh(PI /4) / 2.0; --> PI / 4 = 45 deg
     var mapScale = (xExtentAtZeroZ / (this.width / 2.0)) * 0.414375;
+
+    // now we need to scale by our display dpi
+    mapScale *= wa.gDevicePixelRatio;
+
     // mapScale will scale units to 1-1 pixel mapping on the XY plane
     this.setWorldScale(mapScale, mapScale, mapScale);
 
