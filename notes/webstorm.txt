@@ -1,0 +1,6 @@
+webstorm 6 local server
+
+http://localhost:63342/<project_name>/
+
+http://localhost:63342/webgl_app01/
+
