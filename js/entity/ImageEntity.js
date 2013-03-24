@@ -82,8 +82,8 @@ wa.entity.ImageEntity = function() {
         var quadHeightScale = wa.render.RenderConstants.MAX_QUAD_DIMENSION / scaledImageHeight * 1.0;
         var quadScale = quadWidthScale < quadHeightScale ? quadWidthScale : quadHeightScale;
         quadScale = quadScale < 1.0 ? quadScale : 1.0;
-        var scaledQuadWidth = scaledImageWidth * quadScale;
-        var scaledQuadHeight = scaledImageHeight * quadScale;
+        var scaledQuadWidth = scaledImageWidth * quadScale * wa.gDevicePixelRatio;
+        var scaledQuadHeight = scaledImageHeight * quadScale * wa.gDevicePixelRatio;
 
         self.setDimensions(Math.floor(scaledQuadWidth), Math.floor(scaledQuadHeight));
 

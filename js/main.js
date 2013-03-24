@@ -21,15 +21,9 @@ function mainInit() {
     wa.gSelectState = document.getElementById('StateSelect');
     wa.gMsgArea = document.getElementById('msgArea');
 
-    // we handle the screen dpi scaling here
-    var desiredWidth = 1024;
-    var desiredHeight = 768;
-    wa.gCanvasElement.style.width = desiredWidth + 'px';
-    wa.gCanvasElement.style.height = desiredHeight + 'px';
-
-    wa.gDevicePixelRatio = window.devicePixelRatio || 1;
-    wa.gCanvasElement.width = desiredWidth * wa.gDevicePixelRatio;
-    wa.gCanvasElement.height = desiredHeight * wa.gDevicePixelRatio;
+    wa.gDevicePixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1;
+    wa.gCanvasElement.width = wa.gCanvasElement.clientWidth * wa.gDevicePixelRatio;
+    wa.gCanvasElement.height = wa.gCanvasElement.clientHeight * wa.gDevicePixelRatio;
     console.log('devicePixelRatio: ' + wa.gDevicePixelRatio);
 
     wa.gCanvasContext = wa.gCanvasElement.getContext('webgl');
