@@ -20,6 +20,18 @@ function mainInit() {
     wa.gCanvasElement = document.getElementById('renderCanvas');
     wa.gSelectState = document.getElementById('StateSelect');
     wa.gMsgArea = document.getElementById('msgArea');
+
+    // we handle the screen dpi scaling here
+    var desiredWidth = 1024;
+    var desiredHeight = 768;
+    wa.gCanvasElement.style.width = desiredWidth + 'px';
+    wa.gCanvasElement.style.height = desiredHeight + 'px';
+
+    wa.gDevicePixelRatio = window.devicePixelRatio || 1;
+    wa.gCanvasElement.width = desiredWidth * wa.gDevicePixelRatio;
+    wa.gCanvasElement.height = desiredHeight * wa.gDevicePixelRatio;
+    console.log('devicePixelRatio: ' + wa.gDevicePixelRatio);
+
     wa.gCanvasContext = wa.gCanvasElement.getContext('webgl');
 
     // now, use khronos helper to test for webGL support and setup the gl context
