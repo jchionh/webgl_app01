@@ -1,19 +1,19 @@
 /**
  * User: jchionh
- * Date: 3/3/13
- * Time: 10:31 PM
+ * Date: 5/3/13
+ * Time: 9:54 PM
  */
 // namespace
 wa.states = wa.states || {};
 
 /**
  *
- * // loads up images and floats them in 3D space
+ * // loads up images and spins them
  *
  * @constructor
  * @extends wa.runstate.GLRunState
  */
-wa.states.FloatyImages = function() {
+wa.states.SpinningImages = function() {
     // call the super class init
     wa.runstate.GLRunState.call(this, wa.runstate.RunFlag.SUSPEND_LOWER);
     this.scene = new wa.render.Scene();
@@ -25,15 +25,15 @@ wa.states.FloatyImages = function() {
 };
 
 // extend from GLRunState
-wa.utils.extend(wa.states.FloatyImages, wa.runstate.GLRunState);
+wa.utils.extend(wa.states.SpinningImages, wa.runstate.GLRunState);
 
 
 /**
  * onstart
  * @override
  */
-wa.states.FloatyImages.prototype.onStart = function() {
-    console.log('FloatyImages::onStart');
+wa.states.SpinningImages.prototype.onStart = function() {
+    console.log('SpinningImages::onStart');
     var root = this.scene.getRoot();
 
     var canvasWidth = wa.gCanvasElement.clientWidth * 1.0;
@@ -64,7 +64,7 @@ wa.states.FloatyImages.prototype.onStart = function() {
  * onstop
  * @override
  */
-wa.states.FloatyImages.prototype.onStop = function() {
+wa.states.SpinningImages.prototype.onStop = function() {
     // cleanup
     var count = this.imageEntities.length;
     for (var i = 0; i < count; ++i) {
@@ -78,7 +78,7 @@ wa.states.FloatyImages.prototype.onStop = function() {
     // release our scene
     this.scene.release();
     this.scene = null;
-    console.log('FloatyImages::onStop');
+    console.log('SpinningImages::onStop');
 };
 
 /**
@@ -86,39 +86,13 @@ wa.states.FloatyImages.prototype.onStop = function() {
  * @override
  * @param {number} dt
  */
-wa.states.FloatyImages.prototype.onUpdate = function(dt) {
-    //console.log('FloatyImages::onUpdate');
+wa.states.SpinningImages.prototype.onUpdate = function(dt) {
+    //console.log('SpinningImages::onUpdate');
     // traverse through our image entites and update them
     var count = this.imageEntities.length;
     for (var i = 0; i < count; ++i) {
-        //this.imageEntities[i].update(dt);
-        this.floatImage(this.imageEntities[i], dt);
+        this.imageEntities[i].update(dt);
     }
-};
-
-/**
- * float animate the images
- * @param {wa.entity.ImageEntity} imageEntity
- * @param {number} dt
- */
-wa.states.FloatyImages.prototype.floatImage = function(imageEntity, dt) {
-    imageEntity.orientation[o.PITCH] += imageEntity.rotationSpeed;
-    if (imageEntity.orientation[o.PITCH] > 360.0) {
-        imageEntity.orientation[o.PITCH] -= (imageEntity.orientation[o.PITCH] - 360.0);
-    }
-
-    imageEntity.orientation[o.ROLL] -= imageEntity.rotationSpeed;
-    if (imageEntity.orientation[o.ROLL] < 0.0) {
-        imageEntity.orientation[o.ROLL] += (360.0 - imageEntity.orientation[o.ROLL]);
-    }
-
-    if (imageEntity.position[v.Z] > 0.0 || imageEntity.position[v.Z] < -1000.0) {
-        imageEntity.direction *= -1.0;
-        imageEntity.rotationSpeed = Math.random() * 0.003;
-        imageEntity.translateSpeed = Math.random() * 5.0;
-        imageEntity.position[v.Z] += (imageEntity.direction * 5.5);
-    }
-    imageEntity.position[v.Z] += (imageEntity.direction * imageEntity.translateSpeed);
 };
 
 /**
@@ -126,8 +100,7 @@ wa.states.FloatyImages.prototype.floatImage = function(imageEntity, dt) {
  * @param {number} dt
  * @param {WebGLRenderingContext} gl
  */
-wa.states.FloatyImages.prototype.onRender = function(dt, gl) {
-    //console.log('FloatyImages::onRender');
+wa.states.SpinningImages.prototype.onRender = function(dt, gl) {
+    //console.log('SpinningImages::onRender');
     wa.gRenderer.render(gl, this.scene);
 };
-

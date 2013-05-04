@@ -161,7 +161,7 @@ wa.entity.ImageEntity.prototype.drawTexture = function(gl, shaderHandleRefs) {
  * @param {number} dt
  */
 wa.entity.ImageEntity.prototype.update = function(dt) {
-    this.orientation[o.PITCH] += this.rotationSpeed;
+    /*this.orientation[o.PITCH] += this.rotationSpeed;
     if (this.orientation[o.PITCH] > 360.0) {
         this.orientation[o.PITCH] -= (this.orientation[o.PITCH] - 360.0);
     }
@@ -177,7 +177,7 @@ wa.entity.ImageEntity.prototype.update = function(dt) {
         this.translateSpeed = Math.random() * 5.0;
         this.position[v.Z] += (this.direction * 5.5);
     }
-    this.position[v.Z] += (this.direction * this.translateSpeed);
+    this.position[v.Z] += (this.direction * this.translateSpeed);*/
 };
 
 

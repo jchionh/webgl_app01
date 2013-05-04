@@ -120,6 +120,11 @@ function switchState() {
                 wa.gMsgArea.innerHTML = '[' + selectedState + ']';
                 break;
 
+            case 'SpinningImages':
+                wa.gStateRunner.switchState(new wa.states.SpinningImages());
+                wa.gMsgArea.innerHTML = '[' + selectedState + ']';
+                break;
+
             default:
                 var msg = 'state: [' + selectedState + '] not implemented yet.';
                 console.log(msg);
