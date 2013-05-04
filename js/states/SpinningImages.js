@@ -51,7 +51,7 @@ wa.states.SpinningImages.prototype.onStart = function() {
         imageEntity.position[v.X] = Math.floor(Math.random() * canvasWidth) - halfCanvasWidth;
         imageEntity.position[v.Y] = Math.floor(Math.random() * canvasHeight) - halfCanvasHeight;
         imageEntity.position[v.Z] = Math.floor(Math.random() * -1000.0);
-        imageEntity.rotationSpeed = Math.random() * 0.003;
+        imageEntity.rotationSpeed = Math.random() * 0.503;
         imageEntity.translateSpeed = Math.random() * 5.0;
 
         // add to our scene
@@ -91,9 +91,22 @@ wa.states.SpinningImages.prototype.onUpdate = function(dt) {
     // traverse through our image entites and update them
     var count = this.imageEntities.length;
     for (var i = 0; i < count; ++i) {
-        this.imageEntities[i].update(dt);
+        //this.imageEntities[i].update(dt);
+        this.spinImage(this.imageEntities[i], dt);
     }
 };
+
+
+/**
+ * spin animate the images
+ * @param {wa.entity.ImageEntity} imageEntity
+ * @param {number} dt
+ */
+wa.states.SpinningImages.prototype.spinImage = function(imageEntity, dt) {
+    imageEntity.orientation[o.ROLL] += imageEntity.rotationSpeed;
+};
+
+
 
 /**
  * @override
