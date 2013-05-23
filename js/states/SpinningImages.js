@@ -36,27 +36,27 @@ wa.states.SpinningImages.prototype.onStart = function() {
     console.log('SpinningImages::onStart');
     var root = this.scene.getRoot();
 
-    var canvasWidth = wa.gCanvasElement.clientWidth * 1.0;
+    var canvasWidth = wa.gCanvasElement.clientWidth;
     var halfCanvasWidth = canvasWidth / 2.0;
-    var canvasHeight = wa.gCanvasElement.clientWidth * 1.0;
+    var canvasHeight = wa.gCanvasElement.clientWidth;
     var halfCanvasHeight = canvasHeight / 2.0;
 
-    // now init all our images in the imageList
-    for (var i = 0; i < wa.data.ImageListURLs.length; ++i) {
-        var imageEntity = new wa.entity.ImageEntity();
-        // load images
-        imageEntity.loadImageURL(wa.data.ImageListURLs[i]);
 
+    // create our image entities
+    this.imageEntities = wa.utils.createImageEntityArray(wa.data.ImageListURLs);
+
+    // now init all our images to positions, and add to our scene
+    for (var i = 0; i < this.imageEntities.length; ++i) {
+        var imageEntity = this.imageEntities[i];
         // randomize positions
         imageEntity.position[v.X] = Math.floor(Math.random() * canvasWidth) - halfCanvasWidth;
         imageEntity.position[v.Y] = Math.floor(Math.random() * canvasHeight) - halfCanvasHeight;
         imageEntity.position[v.Z] = Math.floor(Math.random() * -1000.0);
-        imageEntity.rotationSpeed = Math.random() * 0.503;
+        imageEntity.rotationSpeed = Math.random() * 0.003;
         imageEntity.translateSpeed = Math.random() * 5.0;
 
         // add to our scene
         wa.utils.inList.addChild(root, imageEntity);
-        this.imageEntities.push(imageEntity);
     }
 };
 
