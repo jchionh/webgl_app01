@@ -38,11 +38,11 @@ wa.states.FloatyImages.prototype.onStart = function() {
 
     var canvasWidth = wa.gCanvasElement.clientWidth;
     var halfCanvasWidth = canvasWidth / 2.0;
-    var canvasHeight = wa.gCanvasElement.clientWidth;
+    var canvasHeight = wa.gCanvasElement.clientHeight;
     var halfCanvasHeight = canvasHeight / 2.0;
 
     // create our image entities
-    this.imageEntities = wa.utils.createImageEntityArray(wa.data.ImageListURLs);
+    this.imageEntities = wa.entity.createImageEntityArray(wa.data.ImageListURLs);
 
     // now init all our images to positions, and add to our scene
     for (var i = 0; i < this.imageEntities.length; ++i) {
