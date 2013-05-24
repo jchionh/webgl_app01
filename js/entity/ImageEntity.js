@@ -71,9 +71,9 @@ wa.entity.ImageEntity = function() {
             scaledImage.src = scaledCanvas.toDataURL("image/jpeg");
             addToLibraryNext = false;
             scaledImage.onload = function() {
-                var texture = wa.gTextureLibrary.addTexture(originalSrc, scaledImage, true);
+                var savedTexture = wa.gTextureLibrary.addTexture(originalSrc, scaledImage, true);
                 //console.log("w: " + self.image.width + " h: " + self.image.height);
-                self.texture = texture;
+                self.texture = savedTexture;
             }
         }
 
@@ -89,9 +89,9 @@ wa.entity.ImageEntity = function() {
         self.setDimensions(Math.floor(scaledQuadWidth), Math.floor(scaledQuadHeight));
 
         if (addToLibraryNext) {
-            var texture = wa.gTextureLibrary.addTexture(originalSrc, scaledImage, false);
+            var savedTexture = wa.gTextureLibrary.addTexture(originalSrc, scaledImage, false);
             //console.log("w: " + self.image.width + " h: " + self.image.height);
-            self.texture = texture;
+            self.texture = savedTexture;
         }
     };
 };
@@ -143,6 +143,15 @@ wa.entity.ImageEntity.prototype.drawTexture = function(gl, shaderHandleRefs) {
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, this.texture.textureHandle);
     gl.uniform1i(shaderHandleRefs.texSamplerHandle, 0);
+    gl.uniform1i(shaderHandleRefs.doVignetteHandle, wa.entity.ImageEntityGlobals.doVignette);
+
+    gl.uniform1f(shaderHandleRefs.vigOuterHandle, wa.entity.ImageEntityGlobals.vigOuterBorder);
+    gl.uniform1f(shaderHandleRefs.vigFadeHandle, wa.entity.ImageEntityGlobals.vigFade);
+    gl.uniform1f(shaderHandleRefs.fStop, wa.entity.ImageEntityGlobals.fStop);
+
+    gl.uniform1f(shaderHandleRefs.texCenterU, this.texScale[v.X] / 2.0);
+    gl.uniform1f(shaderHandleRefs.texCenterV, this.texScale[v.Y] / 2.0);
+
 
     gl.bindBuffer(gl.ARRAY_BUFFER, this.shape.getTexCoordBufferObject());
     gl.enableVertexAttribArray(shaderHandleRefs.texCoordHandle);

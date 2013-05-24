@@ -11,6 +11,7 @@ gl = null;
  * init our app
  */
 function mainInit() {
+
     // initing our app globals
     wa.gTitleElement = document.getElementsByTagName('title')[0];
     //wa.gSysMessageElement = document.getElementById('sysMessageArea');
@@ -83,6 +84,44 @@ function mainInit() {
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
 }
+
+
+/**
+ * turn vignette on or off
+ */
+function vignetteOnOff() {
+    var doVignette = document.getElementById("doVignette").checked;
+    document.getElementById("doVignetteText").innerText = doVignette ? "On" : "Off";
+    wa.entity.ImageEntityGlobals.doVignette = doVignette;
+}
+
+/**
+ * update the state of the slider
+ * @param {String} name
+ */
+function sliderChanged(name) {
+    var value = document.getElementById(name).value;
+    document.getElementById(name + "Text").innerText = "" + value;
+    wa.entity.ImageEntityGlobals[name] = value;
+}
+
+function defaultVignetteValues() {
+    var name = "vigOuterBorder";
+    document.getElementById(name).value = 1.3;
+    document.getElementById(name + "Text").innerText = "1.3";
+    wa.entity.ImageEntityGlobals[name] = 1.3;
+
+    name = "vigFade";
+    document.getElementById(name).value = 22;
+    document.getElementById(name + "Text").innerText = "22";
+    wa.entity.ImageEntityGlobals[name] = 22;
+
+    name = "fStop";
+    document.getElementById(name).value = 0.9;
+    document.getElementById(name + "Text").innerText = "0.9";
+    wa.entity.ImageEntityGlobals[name] = 0.9;
+}
+
 
 /**
  * this is our mainloop, that will be called with requestAnimationFrame

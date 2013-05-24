@@ -61,17 +61,37 @@
 
         // here's the input shader
         uniform sampler2D u_Texture;
+        uniform bool u_doVignette;
+        uniform float u_vigOuterBorder;
+        uniform float u_vigFade;
+        uniform float u_fStop;
+        uniform float u_texCenterU;
+        uniform float u_texCenterV;
 
         // here's the interpolated vertex color for this fragment
         varying vec4 v_Color;
         // and the interpolated tex coord
         varying vec2 v_TexCoord;
 
+        // user vars
+        float vigInnerBorder = 0.0;
+
+        float vignette()
+        {
+            if (!u_doVignette) {
+                return 1.0;
+            }
+            float dist = distance(v_TexCoord.xy, vec2(u_texCenterU, u_texCenterV));
+            dist = smoothstep(u_vigOuterBorder + (u_fStop / u_vigFade), vigInnerBorder + (u_fStop / u_vigFade), dist);
+            return clamp(dist, 0.0, 1.0);
+        }
+
         // main program
         void main()
         {
             // final color is the vertex color with the texture
-            gl_FragColor = v_Color * texture2D(u_Texture, v_TexCoord);
+            gl_FragColor = vignette() * v_Color * texture2D(u_Texture, v_TexCoord);
+            gl_FragColor.a = 1.0;
         }
     </script>
 
@@ -95,6 +115,43 @@
 <div id="renderArea" style="position: relative; left: 0px; top: 0px;">
     <!--<div id="hudBeforeCanvas" style="position: absolute; left: 0px; top: 0px; width: 800px; height: 600px;"></div> -->
     <canvas id="renderCanvas" style="width: 1024px; height: 768px; position: absolute; left: 0px; top: 0px;"></canvas>
+</div>
+<div id="controls" style="position: relative; left: 1024px; top: 0px;">
+    <table>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Vignette</td>
+            <td>&nbsp;</td>
+            <td><input id="doVignette" type="checkbox" checked="checked" onchange="vignetteOnOff();"/></td>
+            <td>&nbsp;</td>
+            <td><div id="doVignetteText">On</div></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Border</td>
+            <td>&nbsp;</td>
+            <td><input id="vigOuterBorder" type="range" min="0.01" max="3.0" step="0.01" value="1.3" onchange="sliderChanged('vigOuterBorder');"/></td>
+            <td>&nbsp;</td>
+            <td><div id="vigOuterBorderText">1.3</div></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Fade</td>
+            <td>&nbsp;</td>
+            <td><input id="vigFade" type="range" min="10" max="70" step="1" value="22" onchange="sliderChanged('vigFade');"/></td>
+            <td>&nbsp;</td>
+            <td><div id="vigFadeText">22</div></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>F-Stop</td>
+            <td>&nbsp;</td>
+            <td><input id="fStop" type="range" min="0.01" max="8.0" step="0.01" value="0.9" onchange="sliderChanged('fStop');"/></td>
+            <td>&nbsp;</td>
+            <td><div id="fStopText">0.9</div></td>
+        </tr>
+    </table>
+    <button onclick="defaultVignetteValues();">Default Vignette Values</button>
 </div>
 <!--
 <div id="sysMessageArea" style="position: relative;">
@@ -137,6 +194,7 @@
 
 <!-- entity -->
 <script src="js/entity/Entity.js"></script>
+<script src="js/entity/ImageEntityGlobals.js"></script>
 <script src="js/entity/ImageEntity.js"></script>
 <script src="js/entity/ImageEntityFactory.js"></script>
 

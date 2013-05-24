@@ -53,6 +53,15 @@ wa.render.Renderer.prototype.initDefaultShaders = function(gl, vtxShaderId, frag
     this.shaderHandleRefs.matrixHandle = gl.getUniformLocation(shaderProgram, "u_MVPMatrix");
     this.shaderHandleRefs.texMatrixHandle = gl.getUniformLocation(shaderProgram, "u_TexMatrix");
     this.shaderHandleRefs.texSamplerHandle = gl.getUniformLocation(shaderProgram, "u_Texture");
+
+    this.shaderHandleRefs.doVignetteHandle = gl.getUniformLocation(shaderProgram, "u_doVignette");
+    this.shaderHandleRefs.vigOuterHandle = gl.getUniformLocation(shaderProgram, "u_vigOuterBorder");
+    this.shaderHandleRefs.vigFadeHandle = gl.getUniformLocation(shaderProgram, "u_vigFade");
+    this.shaderHandleRefs.fStop = gl.getUniformLocation(shaderProgram, "u_fStop");
+
+    this.shaderHandleRefs.texCenterU = gl.getUniformLocation(shaderProgram, "u_texCenterU");
+    this.shaderHandleRefs.texCenterV = gl.getUniformLocation(shaderProgram, "u_texCenterV");
+
     console.log("max tex size: " + gl.getParameter(gl.MAX_TEXTURE_SIZE));
     //console.log("texSamplerHandle: " + this.shaderHandleRefs.texSamplerHandle);
     gl.useProgram(shaderProgram);
