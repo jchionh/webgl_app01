@@ -50,6 +50,10 @@ wa.runstate.StateRunner = function() {
     this.stack = [];
 };
 
+/**
+ * when release is called, we call all currently runing
+ * state onStop() and release ressources of the states
+ */
 wa.runstate.StateRunner.prototype.release = function() {
 
     var count = this.stack.length;
