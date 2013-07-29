@@ -79,7 +79,7 @@ function mainInit() {
     wa.gRenderer.setViewpoint(gl, wa.gViewpoint);
 
     // add a floaty images state
-    wa.gStateRunner.addState(new wa.states.FloatyImages());
+    wa.gStateRunner.addState(new wa.states.StaticImages());
 
     // call our mainloop the first time with a current timestamp
     mainLoop(new Date().getTime());
@@ -154,6 +154,10 @@ function switchState() {
     //console.log('value: ' + selectedState);
     if (wa.gStateRunner !== null) {
         switch (selectedState) {
+            case 'StaticImages':
+                wa.gStateRunner.switchState(new wa.states.StaticImages());
+                wa.gMsgArea.innerHTML = '[' + selectedState + ']';
+                break;
             case 'FloatyImages':
                 wa.gStateRunner.switchState(new wa.states.FloatyImages());
                 wa.gMsgArea.innerHTML = '[' + selectedState + ']';
