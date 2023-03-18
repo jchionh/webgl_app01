@@ -2,5 +2,5 @@ The goal of this WebGL app is to have a simple rendering framework to draw recta
 with images in 3D space.
 
 You can see the latest results at:
-http://jchionh.github.com/webgl_app01/
+http://jchionh.github.io/webgl_app01/
 
